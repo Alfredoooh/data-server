@@ -1,1 +1,46 @@
- 
+{
+  "avatars": [
+    {
+      "id": "avatar_1_001",
+      "name": "Avatar Abstrato Azul",
+      "imageUrl": "https://i.pravatar.cc/300?img=1",
+      "category": "abstract",
+      "color": "#1877F2"
+    },
+    {
+      "id": "avatar_1_002",
+      "name": "Avatar Abstrato Verde",
+      "imageUrl": "https://i.pravatar.cc/300?img=2",
+      "category": "abstract",
+      "color": "#4CAF50"
+    },
+    {
+      "id": "avatar_1_003",
+      "name": "Avatar Abstrato Roxo",
+      "imageUrl": "https://i.pravatar.cc/300?img=3",
+      "category": "abstract",
+      "color": "#9C27B0"
+    },
+    {
+      "id": "avatar_1_004",
+      "name": "Avatar Abstrato Laranja",
+      "imageUrl": "https://i.pravatar.cc/300?img=4",
+      "category": "abstract",
+      "color": "#FF9800"
+    },
+    {
+      "id": "avatar_1_005",
+      "name": "Avatar Abstrato Rosa",
+      "imageUrl": "https://i.pravatar.cc/300?img=5",
+      "category": "abstract",
+      "color": "#E91E63"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "fileNumber": 1,
+    "totalAvatars": 5,
+    "lastUpdated": "2025-11-09T00:00:00Z",
+    "categories": ["abstract"]
+  }
+}

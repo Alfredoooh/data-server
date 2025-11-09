@@ -1,1 +1,52 @@
- 
+{
+  "advertisements": [
+    {
+      "id": "ad_1_001",
+      "title": "Template Premium de Currículo",
+      "description": "Destaque-se no mercado com nossos templates profissionais",
+      "imageUrl": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800",
+      "actionUrl": "https://example.com/premium/curriculum",
+      "actionText": "Ver Mais",
+      "category": "curriculum",
+      "backgroundColor": "#1877F2",
+      "priority": 1,
+      "isActive": true,
+      "startDate": "2025-01-01T00:00:00Z",
+      "endDate": "2025-12-31T23:59:59Z"
+    },
+    {
+      "id": "ad_1_002",
+      "title": "Certificados Personalizados",
+      "description": "Crie certificados impressionantes em minutos",
+      "imageUrl": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800",
+      "actionUrl": "https://example.com/templates/certificates",
+      "actionText": "Explorar",
+      "category": "certificate",
+      "backgroundColor": "#4CAF50",
+      "priority": 2,
+      "isActive": true,
+      "startDate": "2025-01-01T00:00:00Z",
+      "endDate": "2025-12-31T23:59:59Z"
+    },
+    {
+      "id": "ad_1_003",
+      "title": "Apresentações Profissionais",
+      "description": "Slides modernos para suas apresentações de negócios",
+      "imageUrl": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800",
+      "actionUrl": "https://example.com/premium/presentations",
+      "actionText": "Começar Agora",
+      "category": "presentation",
+      "backgroundColor": "#FF9800",
+      "priority": 3,
+      "isActive": true,
+      "startDate": "2025-01-01T00:00:00Z",
+      "endDate": "2025-12-31T23:59:59Z"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "fileNumber": 1,
+    "totalAds": 3,
+    "lastUpdated": "2025-11-09T00:00:00Z"
+  }
+}

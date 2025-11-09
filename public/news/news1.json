@@ -1,0 +1,23 @@
+{
+  "articles": [
+    {
+      "id": "news_1_001",
+      "title": "...",
+      "description": "...",
+      "content": "...",
+      "source": "...",
+      "author": "...",
+      "imageUrl": "...",
+      "category": "...",
+      "tags": [...],
+      "publishedAt": "2025-11-09T10:30:00Z",
+      "url": "..."
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "fileNumber": 1,
+    "totalArticles": 5,
+    "lastUpdated": "2025-11-09T00:00:00Z"
+  }
+}

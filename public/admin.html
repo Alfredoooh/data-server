@@ -3,39 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Data Server</title>
+    <title>Admin Panel</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: system-ui, sans-serif;
             background: #f5f5f5;
             padding: 20px;
         }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .header {
+        
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        .box {
             background: white;
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
-        .header h1 {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
+        
+        h1 { font-size: 24px; margin-bottom: 10px; }
+        
         .status {
             display: inline-block;
             padding: 4px 12px;
@@ -43,25 +32,17 @@
             font-size: 13px;
             font-weight: 600;
         }
-
+        
         .status.online { background: #dcfce7; color: #166534; }
         .status.offline { background: #fee2e2; color: #991b1b; }
-
-        .config-box {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-
+        
         .tabs {
             display: flex;
             gap: 8px;
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
-
+        
         .tab {
             background: white;
             border: 2px solid #e5e7eb;
@@ -70,67 +51,32 @@
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
-            color: #6b7280;
-            transition: all 0.2s;
         }
-
-        .tab:hover {
-            border-color: #3b82f6;
-            color: #3b82f6;
-        }
-
-        .tab.active {
-            background: #3b82f6;
-            border-color: #3b82f6;
-            color: white;
-        }
-
-        .content {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            display: none;
-        }
-
-        .content.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
+        
+        .tab.active { background: #3b82f6; color: white; border-color: #3b82f6; }
+        
+        .content { display: none; }
+        .content.active { display: block; }
+        
+        .form-group { margin-bottom: 16px; }
+        
         .form-group label {
             display: block;
             margin-bottom: 6px;
             font-size: 14px;
             font-weight: 600;
-            color: #374151;
         }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
+        
+        input, textarea, select {
             width: 100%;
             padding: 10px;
             border: 2px solid #e5e7eb;
             border-radius: 6px;
             font-size: 14px;
         }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #3b82f6;
-        }
-
-        .form-group textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
-
+        
+        textarea { min-height: 80px; resize: vertical; }
+        
         .btn {
             background: #3b82f6;
             color: white;
@@ -141,72 +87,30 @@
             font-weight: 600;
             cursor: pointer;
             width: 100%;
-            transition: background 0.2s;
         }
-
-        .btn:hover {
-            background: #2563eb;
-        }
-
-        .btn:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
-        }
-
+        
+        .btn:hover { background: #2563eb; }
+        
         .alert {
             padding: 12px;
             border-radius: 6px;
             margin-bottom: 16px;
             font-size: 14px;
         }
-
-        .alert.success {
-            background: #dcfce7;
-            color: #166534;
-            border: 1px solid #86efac;
-        }
-
-        .alert.error {
-            background: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #fca5a5;
-        }
-
-        .alert.info {
-            background: #dbeafe;
-            color: #1e40af;
-            border: 1px solid #93c5fd;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
-        }
-
+        
+        .alert.success { background: #dcfce7; color: #166534; }
+        .alert.error { background: #fee2e2; color: #991b1b; }
+        
         .item {
             background: #f9fafb;
             padding: 12px;
             border-radius: 6px;
-            border: 1px solid #e5e7eb;
+            margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
         }
-
-        .item-title {
-            font-weight: 600;
-            font-size: 14px;
-            color: #111827;
-        }
-
-        .item-meta {
-            font-size: 12px;
-            color: #6b7280;
-            margin-top: 4px;
-        }
-
+        
         .delete-btn {
             background: #ef4444;
             color: white;
@@ -214,246 +118,134 @@
             padding: 6px 12px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 12px;
-        }
-
-        .delete-btn:hover {
-            background: #dc2626;
-        }
-
-        .loading {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid #f3f4f6;
-            border-top-color: #3b82f6;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .list-container {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .url-input {
-            font-family: monospace;
-            font-size: 13px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🔧 Painel Admin</h1>
-            <p style="color: #6b7280; font-size: 14px; margin: 8px 0;">Sistema de gerenciamento - Render</p>
-            <span class="status" id="status">⏳ Verificando...</span>
+        <div class="box">
+            <h1>🔧 Admin Panel</h1>
+            <span class="status" id="status">⏳ Checking...</span>
         </div>
 
-        <div class="config-box" id="configBox">
-            <h2 style="font-size: 18px; margin-bottom: 12px;">⚙️ Configuração</h2>
+        <div class="box" id="configBox">
+            <h2 style="margin-bottom: 16px;">⚙️ Config</h2>
             <div id="configAlert"></div>
             <div class="form-group">
-                <label>URL da API *</label>
-                <input type="text" id="apiUrl" class="url-input" placeholder="https://data-ekoe.onrender.com" value="https://data-ekoe.onrender.com">
-                <small style="color: #6b7280; font-size: 12px;">URL do seu servidor no Render</small>
+                <label>API URL</label>
+                <input type="text" id="apiUrl" value="https://data-ekoe.onrender.com">
             </div>
             <div class="form-group">
-                <label>API Key *</label>
-                <input type="password" id="apiKey" placeholder="DataHub2025SecureKey!@#$%">
-                <small style="color: #6b7280; font-size: 12px;">Chave de autenticação</small>
+                <label>API Key</label>
+                <input type="password" id="apiKey" value="DataHub2025SecureKey!@#$%">
             </div>
-            <button class="btn" onclick="saveConfig()">Salvar e Conectar</button>
+            <button class="btn" onclick="saveConfig()">Connect</button>
         </div>
 
         <div id="mainContent" style="display: none;">
             <div class="tabs">
-                <button class="tab active" onclick="showTab('news')">📰 Notícias</button>
-                <button class="tab" onclick="showTab('books')">📚 Livros</button>
-                <button class="tab" onclick="showTab('ads')">📢 Anúncios</button>
-                <button class="tab" onclick="showTab('avatars')">👤 Avatares</button>
-                <button class="tab" onclick="showTab('list')">📋 Listar</button>
+                <button class="tab active" onclick="showTab('news')">📰 News</button>
+                <button class="tab" onclick="showTab('books')">📚 Books</button>
+                <button class="tab" onclick="showTab('ads')">📢 Ads</button>
+                <button class="tab" onclick="showTab('list')">📋 List</button>
             </div>
 
             <!-- News -->
-            <div class="content active" id="news-content">
-                <h2 style="font-size: 18px; margin-bottom: 16px;">Nova Notícia</h2>
+            <div class="box content active" id="news-content">
+                <h2 style="margin-bottom: 16px;">New Article</h2>
                 <div id="news-alert"></div>
                 <form onsubmit="createNews(event)">
                     <div class="form-group">
-                        <label>Título *</label>
+                        <label>Title *</label>
                         <input type="text" id="newsTitle" required>
                     </div>
                     <div class="form-group">
-                        <label>Descrição *</label>
+                        <label>Description *</label>
                         <textarea id="newsDesc" required></textarea>
                     </div>
-                    <div class="grid">
-                        <div class="form-group">
-                            <label>Fonte</label>
-                            <input type="text" id="newsSource" placeholder="Ex: Tech News">
-                        </div>
-                        <div class="form-group">
-                            <label>Autor</label>
-                            <input type="text" id="newsAuthor" placeholder="Ex: João Silva">
-                        </div>
-                    </div>
                     <div class="form-group">
-                        <label>URL da Imagem</label>
-                        <input type="url" id="newsImage" placeholder="https://...">
+                        <label>Image URL</label>
+                        <input type="url" id="newsImage">
                     </div>
-                    <div class="form-group">
-                        <label>Categoria</label>
-                        <select id="newsCategory">
-                            <option value="technology">Tecnologia</option>
-                            <option value="business">Negócios</option>
-                            <option value="cryptocurrency">Criptomoedas</option>
-                            <option value="finance">Finanças</option>
-                            <option value="general">Geral</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn">Publicar</button>
+                    <button type="submit" class="btn">Publish</button>
                 </form>
             </div>
 
             <!-- Books -->
-            <div class="content" id="books-content">
-                <h2 style="font-size: 18px; margin-bottom: 16px;">Novo Livro</h2>
+            <div class="box content" id="books-content">
+                <h2 style="margin-bottom: 16px;">New Book</h2>
                 <div id="books-alert"></div>
                 <form onsubmit="createBook(event)">
-                    <div class="grid">
-                        <div class="form-group">
-                            <label>Título *</label>
-                            <input type="text" id="bookTitle" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Autor *</label>
-                            <input type="text" id="bookAuthor" required>
-                        </div>
+                    <div class="form-group">
+                        <label>Title *</label>
+                        <input type="text" id="bookTitle" required>
                     </div>
                     <div class="form-group">
-                        <label>Descrição</label>
+                        <label>Author *</label>
+                        <input type="text" id="bookAuthor" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
                         <textarea id="bookDesc"></textarea>
                     </div>
-                    <div class="grid">
-                        <div class="form-group">
-                            <label>Categoria</label>
-                            <select id="bookCategory">
-                                <option value="Investimentos">Investimentos</option>
-                                <option value="Trading">Trading</option>
-                                <option value="Finanças">Finanças</option>
-                                <option value="Educação">Educação</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Preço (Kz)</label>
-                            <input type="number" id="bookPrice" value="15000">
-                        </div>
-                    </div>
                     <div class="form-group">
-                        <label>URL da Capa</label>
-                        <input type="url" id="bookCover" placeholder="https://...">
+                        <label>Price (Kz)</label>
+                        <input type="number" id="bookPrice" value="15000">
                     </div>
-                    <button type="submit" class="btn">Adicionar</button>
+                    <button type="submit" class="btn">Add Book</button>
                 </form>
             </div>
 
             <!-- Ads -->
-            <div class="content" id="ads-content">
-                <h2 style="font-size: 18px; margin-bottom: 16px;">Novo Anúncio</h2>
+            <div class="box content" id="ads-content">
+                <h2 style="margin-bottom: 16px;">New Ad</h2>
                 <div id="ads-alert"></div>
                 <form onsubmit="createAd(event)">
                     <div class="form-group">
-                        <label>Título *</label>
+                        <label>Title *</label>
                         <input type="text" id="adTitle" required>
                     </div>
                     <div class="form-group">
-                        <label>Descrição *</label>
+                        <label>Description *</label>
                         <textarea id="adDesc" required></textarea>
                     </div>
-                    <div class="grid">
-                        <div class="form-group">
-                            <label>URL da Imagem</label>
-                            <input type="url" id="adImage" placeholder="https://...">
-                        </div>
-                        <div class="form-group">
-                            <label>URL de Ação</label>
-                            <input type="url" id="adUrl" placeholder="https://...">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn">Criar</button>
-                </form>
-            </div>
-
-            <!-- Avatars -->
-            <div class="content" id="avatars-content">
-                <h2 style="font-size: 18px; margin-bottom: 16px;">Novo Avatar</h2>
-                <div id="avatars-alert"></div>
-                <form onsubmit="createAvatar(event)">
                     <div class="form-group">
-                        <label>Nome *</label>
-                        <input type="text" id="avatarName" required>
+                        <label>Image URL</label>
+                        <input type="url" id="adImage">
                     </div>
-                    <div class="form-group">
-                        <label>URL da Imagem *</label>
-                        <input type="url" id="avatarImage" required placeholder="https://...">
-                    </div>
-                    <div class="grid">
-                        <div class="form-group">
-                            <label>Categoria</label>
-                            <select id="avatarCategory">
-                                <option value="abstract">Abstrato</option>
-                                <option value="professional">Profissional</option>
-                                <option value="creative">Criativo</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Cor</label>
-                            <input type="color" id="avatarColor" value="#3b82f6">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn">Adicionar</button>
+                    <button type="submit" class="btn">Create Ad</button>
                 </form>
             </div>
 
             <!-- List -->
-            <div class="content" id="list-content">
-                <h2 style="font-size: 18px; margin-bottom: 16px;">Listar Itens</h2>
+            <div class="box content" id="list-content">
+                <h2 style="margin-bottom: 16px;">Items</h2>
                 <div id="list-alert"></div>
                 <div class="tabs" style="margin-bottom: 16px;">
-                    <button class="tab active" onclick="loadList('news')">Notícias</button>
-                    <button class="tab" onclick="loadList('books')">Livros</button>
-                    <button class="tab" onclick="loadList('advertisements')">Anúncios</button>
-                    <button class="tab" onclick="loadList('avatars')">Avatares</button>
+                    <button class="tab active" onclick="loadList('news')">News</button>
+                    <button class="tab" onclick="loadList('books')">Books</button>
+                    <button class="tab" onclick="loadList('advertisements')">Ads</button>
                 </div>
-                <div class="list-container" id="itemsList">
-                    <p style="text-align: center; color: #6b7280;">Selecione uma categoria</p>
-                </div>
+                <div id="itemsList"></div>
             </div>
         </div>
     </div>
 
     <script>
         let API_URL = 'https://data-ekoe.onrender.com';
-        let API_KEY = '';
+        let API_KEY = 'DataHub2025SecureKey!@#$%';
 
         window.onload = () => {
-            const savedUrl = localStorage.getItem('apiUrl');
-            const savedKey = localStorage.getItem('apiKey');
-            
-            if (savedUrl && savedKey) {
-                API_URL = savedUrl;
-                API_KEY = savedKey;
-                document.getElementById('apiUrl').value = savedUrl;
-                document.getElementById('apiKey').value = savedKey;
+            const saved = localStorage.getItem('apiConfig');
+            if (saved) {
+                const config = JSON.parse(saved);
+                API_URL = config.url;
+                API_KEY = config.key;
+                document.getElementById('apiUrl').value = config.url;
+                document.getElementById('apiKey').value = config.key;
                 document.getElementById('configBox').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
             }
-            
             checkHealth();
         };
 
@@ -463,9 +255,10 @@
                 const data = await res.json();
                 document.getElementById('status').className = 'status online';
                 document.getElementById('status').textContent = '✓ Online';
-            } catch {
+            } catch (err) {
                 document.getElementById('status').className = 'status offline';
                 document.getElementById('status').textContent = '✗ Offline';
+                console.error('Health check failed:', err);
             }
         }
 
@@ -474,18 +267,16 @@
             const key = document.getElementById('apiKey').value.trim();
             
             if (!url || !key) {
-                showAlert('config', 'Preencha URL e API Key', 'error');
+                showAlert('config', 'Fill all fields', 'error');
                 return;
             }
             
             API_URL = url;
             API_KEY = key;
-            localStorage.setItem('apiUrl', url);
-            localStorage.setItem('apiKey', key);
+            localStorage.setItem('apiConfig', JSON.stringify({ url, key }));
             
             document.getElementById('configBox').style.display = 'none';
             document.getElementById('mainContent').style.display = 'block';
-            showAlert('config', 'Configuração salva!', 'success');
             checkHealth();
         }
 
@@ -500,7 +291,7 @@
             const el = document.getElementById(`${tab}-alert`);
             el.className = `alert ${type}`;
             el.textContent = msg;
-            setTimeout(() => el.textContent = '', 4000);
+            setTimeout(() => el.textContent = '', 3000);
         }
 
         async function createNews(e) {
@@ -515,15 +306,14 @@
                     body: JSON.stringify({
                         title: document.getElementById('newsTitle').value,
                         description: document.getElementById('newsDesc').value,
-                        source: document.getElementById('newsSource').value,
-                        author: document.getElementById('newsAuthor').value,
-                        imageUrl: document.getElementById('newsImage').value,
-                        category: document.getElementById('newsCategory').value
+                        imageUrl: document.getElementById('newsImage').value
                     })
                 });
+                
                 const data = await res.json();
+                
                 if (res.ok) {
-                    showAlert('news', '✓ Notícia criada! Arquivo: ' + data.file, 'success');
+                    showAlert('news', '✓ Created: ' + data.file, 'success');
                     e.target.reset();
                 } else {
                     throw new Error(data.error);
@@ -546,14 +336,14 @@
                         title: document.getElementById('bookTitle').value,
                         author: document.getElementById('bookAuthor').value,
                         description: document.getElementById('bookDesc').value,
-                        category: document.getElementById('bookCategory').value,
-                        digitalPrice: parseInt(document.getElementById('bookPrice').value),
-                        coverImageURL: document.getElementById('bookCover').value
+                        digitalPrice: parseInt(document.getElementById('bookPrice').value)
                     })
                 });
+                
                 const data = await res.json();
+                
                 if (res.ok) {
-                    showAlert('books', '✓ Livro criado! Arquivo: ' + data.file, 'success');
+                    showAlert('books', '✓ Created: ' + data.file, 'success');
                     e.target.reset();
                 } else {
                     throw new Error(data.error);
@@ -575,13 +365,14 @@
                     body: JSON.stringify({
                         title: document.getElementById('adTitle').value,
                         description: document.getElementById('adDesc').value,
-                        imageUrl: document.getElementById('adImage').value,
-                        actionUrl: document.getElementById('adUrl').value
+                        imageUrl: document.getElementById('adImage').value
                     })
                 });
+                
                 const data = await res.json();
+                
                 if (res.ok) {
-                    showAlert('ads', '✓ Anúncio criado! Arquivo: ' + data.file, 'success');
+                    showAlert('ads', '✓ Created: ' + data.file, 'success');
                     e.target.reset();
                 } else {
                     throw new Error(data.error);
@@ -591,37 +382,9 @@
             }
         }
 
-        async function createAvatar(e) {
-            e.preventDefault();
-            try {
-                const res = await fetch(`${API_URL}/api/avatars`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-API-Key': API_KEY
-                    },
-                    body: JSON.stringify({
-                        name: document.getElementById('avatarName').value,
-                        imageUrl: document.getElementById('avatarImage').value,
-                        category: document.getElementById('avatarCategory').value,
-                        color: document.getElementById('avatarColor').value
-                    })
-                });
-                const data = await res.json();
-                if (res.ok) {
-                    showAlert('avatars', '✓ Avatar criado! Arquivo: ' + data.file, 'success');
-                    e.target.reset();
-                } else {
-                    throw new Error(data.error);
-                }
-            } catch (err) {
-                showAlert('avatars', '✗ ' + err.message, 'error');
-            }
-        }
-
         async function loadList(type) {
             const list = document.getElementById('itemsList');
-            list.innerHTML = '<p style="text-align: center;"><span class="loading"></span> Carregando...</p>';
+            list.innerHTML = '<p style="text-align: center;">Loading...</p>';
             
             try {
                 const res = await fetch(`${API_URL}/api/${type}`);
@@ -629,26 +392,26 @@
                 const items = data[type] || [];
                 
                 if (items.length === 0) {
-                    list.innerHTML = '<p style="text-align: center; color: #6b7280;">Nenhum item</p>';
+                    list.innerHTML = '<p style="text-align: center;">No items</p>';
                     return;
                 }
 
                 list.innerHTML = items.map(item => `
                     <div class="item">
                         <div>
-                            <div class="item-title">${item.title || item.name}</div>
-                            <div class="item-meta">ID: ${item.id}</div>
+                            <strong>${item.title || item.name}</strong>
+                            <div style="font-size: 12px; color: #666;">${item.id}</div>
                         </div>
-                        <button class="delete-btn" onclick="deleteItem('${type}', '${item.id}')">Deletar</button>
+                        <button class="delete-btn" onclick="deleteItem('${type}', '${item.id}')">Delete</button>
                     </div>
                 `).join('');
             } catch (err) {
-                list.innerHTML = '<p style="text-align: center; color: #ef4444;">Erro ao carregar</p>';
+                list.innerHTML = '<p style="text-align: center; color: red;">Error loading</p>';
             }
         }
 
         async function deleteItem(type, id) {
-            if (!confirm('Deletar este item?')) return;
+            if (!confirm('Delete?')) return;
             
             try {
                 const res = await fetch(`${API_URL}/api/${type}/${id}`, {
@@ -657,10 +420,10 @@
                 });
                 
                 if (res.ok) {
-                    showAlert('list', '✓ Item deletado!', 'success');
+                    showAlert('list', '✓ Deleted', 'success');
                     loadList(type);
                 } else {
-                    throw new Error('Erro ao deletar');
+                    throw new Error('Failed');
                 }
             } catch (err) {
                 showAlert('list', '✗ ' + err.message, 'error');

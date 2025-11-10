@@ -21,7 +21,7 @@ const authenticateApiKey = (req, res, next) => {
   if (!apiKey) {
     return res.status(401).json({ 
       error: 'API key is required',
-      hint: 'Add X-API-Key header or ?api_key=YOUR_KEY to the request'
+      hint: 'Add X-API-Key header or ?api_key=DataHub2025SecureKey!@#$% to the request'
     });
   }
   

@@ -19,8 +19,9 @@ const API_KEY = process.env.API_KEY || 'DataHub2025SecureKey!@#$%';
 
 app.use(cors({
   origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'X-API-Key']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'X-API-Key', 'Authorization'],
+  credentials: true
 }));
 
 app.use(express.json({ limit: '10mb' }));
@@ -37,7 +38,9 @@ app.use((req, res, next) => {
 // ============================================
 
 const authenticateApiKey = (req, res, next) => {
-  const apiKey = req.headers['x-api-key'] || req.query.api_key;
+  const apiKey = req.headers['x-api-key'] || 
+                 req.headers['authorization']?.replace('Bearer ', '') ||
+                 req.query.api_key;
 
   if (!apiKey) {
     return res.status(401).json({ 
@@ -94,8 +97,10 @@ const saveToFile = (type, data, fileNumber = null) => {
   const fileName = `${type.replace(/s$/, '')}${number}.json`;
   const filePath = path.join(dirPath, fileName);
 
+  const dataKey = type === 'news' ? 'articles' : type;
+  
   const fileData = {
-    [type === 'news' ? 'articles' : type]: [data],
+    [dataKey]: [data],
     metadata: {
       version: '1.0.0',
       fileNumber: number,
@@ -122,20 +127,44 @@ app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
-app.get('/viewer', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'viewer.html'));
-});
-
 app.get('/health', (req, res) => {
   res.json({ 
     status: 'OK', 
     timestamp: new Date().toISOString(),
-    version: '2.1.0',
-    features: ['read', 'write', 'api-key-auth', 'search', 'stats']
+    version: '2.0.0',
+    features: ['read', 'write', 'api-key-auth', 'search', 'stats', 'infinite-files']
   });
 });
 
-// GET - Listar todos os itens de um tipo (com paginação)
+// Listar arquivos disponíveis
+app.get('/api/list/:type', (req, res) => {
+  const type = req.params.type;
+  const dirPath = path.join(__dirname, 'public', type);
+  
+  if (!fs.existsSync(dirPath)) {
+    return res.json({ 
+      type,
+      totalFiles: 0,
+      files: []
+    });
+  }
+  
+  const files = fs.readdirSync(dirPath)
+    .filter(file => file.endsWith('.json'))
+    .sort((a, b) => {
+      const numA = parseInt(a.match(/\d+/)?.[0] || '0');
+      const numB = parseInt(b.match(/\d+/)?.[0] || '0');
+      return numA - numB;
+    });
+  
+  res.json({ 
+    type,
+    totalFiles: files.length,
+    files 
+  });
+});
+
+// GET - Listar todos os itens (com paginação)
 app.get('/api/:type', (req, res) => {
   try {
     const type = req.params.type;
@@ -148,7 +177,8 @@ app.get('/api/:type', (req, res) => {
         [type]: [], 
         total: 0, 
         page, 
-        limit 
+        limit,
+        totalPages: 0
       });
     }
 
@@ -253,7 +283,8 @@ app.get('/api/:type/search', (req, res) => {
       results = results.filter(item => 
         item.title?.toLowerCase().includes(query) ||
         item.description?.toLowerCase().includes(query) ||
-        item.name?.toLowerCase().includes(query)
+        item.name?.toLowerCase().includes(query) ||
+        item.author?.toLowerCase().includes(query)
       );
     }
 
@@ -320,7 +351,7 @@ app.get('/api/stats', (req, res) => {
 });
 
 // ============================================
-// ROTAS PROTEGIDAS
+// ROTAS PROTEGIDAS (POST, DELETE)
 // ============================================
 
 // POST - Criar notícia
@@ -371,7 +402,7 @@ app.post('/api/books', authenticateApiKey, (req, res) => {
   try {
     const { 
       title, author, description, category, coverImageURL,
-      digitalPrice, physicalPrice, pages, language
+      digitalPrice, physicalPrice, pages, publisher, isbn, language
     } = req.body;
 
     if (!title || !author) {
@@ -389,7 +420,12 @@ app.post('/api/books', authenticateApiKey, (req, res) => {
       coverImageURL: coverImageURL || null,
       digitalPrice: digitalPrice || 0,
       physicalPrice: physicalPrice || 0,
+      digitalFormat: 'PDF, EPUB',
+      hasPhysicalVersion: true,
       pages: pages || 0,
+      publisher: publisher || 'Marketplace',
+      publicationYear: new Date().getFullYear().toString(),
+      isbn: isbn || '',
       language: language || 'Português',
       rating: 0,
       totalReviews: 0,
@@ -439,6 +475,8 @@ app.post('/api/advertisements', authenticateApiKey, (req, res) => {
       backgroundColor: backgroundColor || '#1877F2',
       priority: priority || 1,
       isActive: isActive !== false,
+      startDate: new Date().toISOString(),
+      endDate: new Date(Date.now() + 365*24*60*60*1000).toISOString(),
       createdAt: new Date().toISOString()
     };
 
@@ -577,7 +615,14 @@ app.use((err, req, res, next) => {
 // ============================================
 
 app.listen(PORT, () => {
-  console.log('\n🚀 DATA SERVER RUNNING');
+  console.log('\n♾️ DATA SERVER - SISTEMA INFINITO');
   console.log(`📡 URL: http://localhost:${PORT}`);
-  console.log(`🔑 API Key: ${API_KEY}\n`);
+  console.log(`🔑 API Key: ${API_KEY}`);
+  console.log('\n📖 Endpoints:');
+  console.log('  GET  /api/:type');
+  console.log('  GET  /api/:type/:id');
+  console.log('  GET  /api/:type/search?q=termo');
+  console.log('  GET  /api/stats');
+  console.log('  POST /api/:type (requer API Key)');
+  console.log('  DELETE /api/:type/:id (requer API Key)\n');
 });

@@ -7,112 +7,102 @@ const crypto = require('crypto');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ============================================
-// CONFIGURAÇÃO
-// ============================================
-
+// API KEY
 const API_KEY = process.env.API_KEY || 'DataHub2025SecureKey!@#$%';
 
 // ============================================
-// MIDDLEWARE
+// MIDDLEWARE - ORDEM IMPORTA!
 // ============================================
 
-app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'X-API-Key', 'Authorization'],
-  credentials: true
-}));
+// CORS primeiro - aceita tudo
+app.use(cors());
 
+// OPTIONS para preflight
+app.options('*', cors());
+
+// JSON parser
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-app.use(express.static('public'));
 
+// Logs
 app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
+  console.log(`${req.method} ${req.path}`);
   next();
 });
 
+// Servir arquivos estáticos
+app.use(express.static('public'));
+
 // ============================================
-// AUTENTICAÇÃO
+// AUTH MIDDLEWARE
 // ============================================
 
-const authenticateApiKey = (req, res, next) => {
-  const apiKey = req.headers['x-api-key'] || 
-                 req.headers['authorization']?.replace('Bearer ', '') ||
-                 req.query.api_key;
-
-  if (!apiKey) {
+const requireAuth = (req, res, next) => {
+  const apiKey = req.headers['x-api-key'] || req.query.api_key;
+  
+  if (!apiKey || apiKey !== API_KEY) {
     return res.status(401).json({ 
-      error: 'API key is required',
-      hint: 'Add X-API-Key header or ?api_key=YOUR_KEY'
+      error: 'Invalid or missing API key' 
     });
   }
-
-  if (apiKey !== API_KEY) {
-    return res.status(403).json({ 
-      error: 'Invalid API key' 
-    });
-  }
-
+  
   next();
 };
 
 // ============================================
-// FUNÇÕES AUXILIARES
+// HELPERS
 // ============================================
 
-const generateId = (prefix = 'item') => {
-  const timestamp = Date.now();
-  const random = crypto.randomBytes(4).toString('hex');
-  return `${prefix}_${timestamp}_${random}`;
+const generateId = () => {
+  return `${Date.now()}_${crypto.randomBytes(4).toString('hex')}`;
 };
 
 const getNextFileNumber = (type) => {
-  const dirPath = path.join(__dirname, 'public', type);
-
-  if (!fs.existsSync(dirPath)) {
-    fs.mkdirSync(dirPath, { recursive: true });
+  const dir = path.join(__dirname, 'public', type);
+  
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
     return 1;
   }
-
-  const files = fs.readdirSync(dirPath)
-    .filter(file => file.endsWith('.json'))
-    .map(file => {
-      const match = file.match(/\d+/);
-      return match ? parseInt(match[0]) : 0;
-    });
-
-  return files.length > 0 ? Math.max(...files) + 1 : 1;
+  
+  const files = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
+  
+  if (files.length === 0) return 1;
+  
+  const numbers = files.map(f => {
+    const match = f.match(/\d+/);
+    return match ? parseInt(match[0]) : 0;
+  });
+  
+  return Math.max(...numbers) + 1;
 };
 
-const saveToFile = (type, data, fileNumber = null) => {
-  const dirPath = path.join(__dirname, 'public', type);
-
-  if (!fs.existsSync(dirPath)) {
-    fs.mkdirSync(dirPath, { recursive: true });
+const saveToFile = (type, data) => {
+  const dir = path.join(__dirname, 'public', type);
+  
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
   }
-
-  const number = fileNumber || getNextFileNumber(type);
-  const fileName = `${type.replace(/s$/, '')}${number}.json`;
-  const filePath = path.join(dirPath, fileName);
-
+  
+  const num = getNextFileNumber(type);
+  const fileName = `${type.replace(/s$/, '')}${num}.json`;
+  const filePath = path.join(dir, fileName);
+  
   const dataKey = type === 'news' ? 'articles' : type;
   
   const fileData = {
     [dataKey]: [data],
     metadata: {
       version: '1.0.0',
-      fileNumber: number,
+      fileNumber: num,
       totalItems: 1,
-      createdAt: new Date().toISOString(),
       lastUpdated: new Date().toISOString()
     }
   };
-
+  
   fs.writeFileSync(filePath, JSON.stringify(fileData, null, 2));
-
-  return { fileName, filePath, fileNumber: number };
+  
+  return fileName;
 };
 
 // ============================================
@@ -127,467 +117,365 @@ app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
+// HEALTH - IMPORTANTE!
 app.get('/health', (req, res) => {
   res.json({ 
-    status: 'OK', 
+    status: 'OK',
     timestamp: new Date().toISOString(),
-    version: '2.0.0',
-    features: ['read', 'write', 'api-key-auth', 'search', 'stats', 'infinite-files']
+    version: '2.0.0'
   });
 });
 
-// Listar arquivos disponíveis
+// Listar arquivos
 app.get('/api/list/:type', (req, res) => {
-  const type = req.params.type;
-  const dirPath = path.join(__dirname, 'public', type);
-  
-  if (!fs.existsSync(dirPath)) {
-    return res.json({ 
-      type,
-      totalFiles: 0,
-      files: []
-    });
+  try {
+    const type = req.params.type;
+    const dir = path.join(__dirname, 'public', type);
+    
+    if (!fs.existsSync(dir)) {
+      return res.json({ type, totalFiles: 0, files: [] });
+    }
+    
+    const files = fs.readdirSync(dir)
+      .filter(f => f.endsWith('.json'))
+      .sort((a, b) => {
+        const numA = parseInt(a.match(/\d+/)?.[0] || '0');
+        const numB = parseInt(b.match(/\d+/)?.[0] || '0');
+        return numA - numB;
+      });
+    
+    res.json({ type, totalFiles: files.length, files });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
-  
-  const files = fs.readdirSync(dirPath)
-    .filter(file => file.endsWith('.json'))
-    .sort((a, b) => {
-      const numA = parseInt(a.match(/\d+/)?.[0] || '0');
-      const numB = parseInt(b.match(/\d+/)?.[0] || '0');
-      return numA - numB;
-    });
-  
-  res.json({ 
-    type,
-    totalFiles: files.length,
-    files 
-  });
 });
 
-// GET - Listar todos os itens (com paginação)
+// Listar itens (com paginação)
 app.get('/api/:type', (req, res) => {
   try {
     const type = req.params.type;
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
-    const dirPath = path.join(__dirname, 'public', type);
-
-    if (!fs.existsSync(dirPath)) {
+    const dir = path.join(__dirname, 'public', type);
+    
+    if (!fs.existsSync(dir)) {
       return res.json({ 
         [type]: [], 
         total: 0, 
-        page, 
-        limit,
-        totalPages: 0
+        page: 1, 
+        limit, 
+        totalPages: 0 
       });
     }
-
-    const files = fs.readdirSync(dirPath)
-      .filter(file => file.endsWith('.json'))
-      .sort((a, b) => {
-        const numA = parseInt(a.match(/\d+/)?.[0] || '0');
-        const numB = parseInt(b.match(/\d+/)?.[0] || '0');
-        return numB - numA;
-      });
-
+    
+    const files = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
     let allItems = [];
     
-    for (const file of files) {
-      const filePath = path.join(dirPath, file);
-      const content = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    files.forEach(file => {
+      const content = JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8'));
       const dataKey = type === 'news' ? 'articles' : type;
       allItems = allItems.concat(content[dataKey] || []);
-    }
-
-    const startIndex = (page - 1) * limit;
-    const endIndex = startIndex + limit;
-    const paginatedItems = allItems.slice(startIndex, endIndex);
-
+    });
+    
+    const startIdx = (page - 1) * limit;
+    const endIdx = startIdx + limit;
+    const items = allItems.slice(startIdx, endIdx);
+    
     res.json({
-      [type]: paginatedItems,
+      [type]: items,
       total: allItems.length,
       page,
       limit,
       totalPages: Math.ceil(allItems.length / limit)
     });
-
-  } catch (error) {
-    console.error('Error listing items:', error);
-    res.status(500).json({ 
-      error: 'Failed to list items',
-      details: error.message 
-    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
-// GET - Buscar item por ID
+// Buscar por ID
 app.get('/api/:type/:id', (req, res) => {
   try {
     const { type, id } = req.params;
-    const dirPath = path.join(__dirname, 'public', type);
-
-    if (!fs.existsSync(dirPath)) {
-      return res.status(404).json({ error: 'Type not found' });
+    const dir = path.join(__dirname, 'public', type);
+    
+    if (!fs.existsSync(dir)) {
+      return res.status(404).json({ error: 'Not found' });
     }
-
-    const files = fs.readdirSync(dirPath).filter(f => f.endsWith('.json'));
-
+    
+    const files = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
+    
     for (const file of files) {
-      const filePath = path.join(dirPath, file);
-      const content = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      const content = JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8'));
       const dataKey = type === 'news' ? 'articles' : type;
-      
-      const item = content[dataKey].find(item => item.id === id);
+      const item = content[dataKey].find(i => i.id === id);
       
       if (item) {
         return res.json(item);
       }
     }
-
-    res.status(404).json({ error: 'Item not found' });
-
-  } catch (error) {
-    console.error('Error getting item:', error);
-    res.status(500).json({ 
-      error: 'Failed to get item',
-      details: error.message 
-    });
+    
+    res.status(404).json({ error: 'Not found' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
-// GET - Buscar itens (search)
+// Buscar
 app.get('/api/:type/search', (req, res) => {
   try {
     const type = req.params.type;
-    const query = req.query.q?.toLowerCase();
-    const category = req.query.category;
-    const dirPath = path.join(__dirname, 'public', type);
-
-    if (!fs.existsSync(dirPath)) {
+    const query = (req.query.q || '').toLowerCase();
+    const dir = path.join(__dirname, 'public', type);
+    
+    if (!fs.existsSync(dir)) {
       return res.json({ results: [], total: 0 });
     }
-
-    const files = fs.readdirSync(dirPath).filter(f => f.endsWith('.json'));
+    
+    const files = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
     let allItems = [];
-
-    for (const file of files) {
-      const filePath = path.join(dirPath, file);
-      const content = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    
+    files.forEach(file => {
+      const content = JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8'));
       const dataKey = type === 'news' ? 'articles' : type;
       allItems = allItems.concat(content[dataKey] || []);
-    }
-
-    let results = allItems;
-
-    if (query) {
-      results = results.filter(item => 
-        item.title?.toLowerCase().includes(query) ||
-        item.description?.toLowerCase().includes(query) ||
-        item.name?.toLowerCase().includes(query) ||
-        item.author?.toLowerCase().includes(query)
-      );
-    }
-
-    if (category) {
-      results = results.filter(item => item.category === category);
-    }
-
-    res.json({
-      results,
-      total: results.length,
-      query,
-      category
     });
-
-  } catch (error) {
-    console.error('Error searching:', error);
-    res.status(500).json({ 
-      error: 'Failed to search',
-      details: error.message 
-    });
+    
+    const results = query ? allItems.filter(item => 
+      (item.title && item.title.toLowerCase().includes(query)) ||
+      (item.description && item.description.toLowerCase().includes(query)) ||
+      (item.name && item.name.toLowerCase().includes(query))
+    ) : allItems;
+    
+    res.json({ results, total: results.length, query });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
-// GET - Estatísticas
+// Stats
 app.get('/api/stats', (req, res) => {
   try {
     const types = ['news', 'books', 'advertisements', 'avatars'];
     const stats = {};
-
+    
     types.forEach(type => {
-      const dirPath = path.join(__dirname, 'public', type);
+      const dir = path.join(__dirname, 'public', type);
       
-      if (fs.existsSync(dirPath)) {
-        const files = fs.readdirSync(dirPath).filter(f => f.endsWith('.json'));
-        let totalItems = 0;
-
+      if (fs.existsSync(dir)) {
+        const files = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
+        let total = 0;
+        
         files.forEach(file => {
-          const content = JSON.parse(fs.readFileSync(path.join(dirPath, file), 'utf8'));
+          const content = JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8'));
           const dataKey = type === 'news' ? 'articles' : type;
-          totalItems += (content[dataKey] || []).length;
+          total += (content[dataKey] || []).length;
         });
-
-        stats[type] = {
-          files: files.length,
-          items: totalItems
-        };
+        
+        stats[type] = { files: files.length, items: total };
       } else {
         stats[type] = { files: 0, items: 0 };
       }
     });
-
-    res.json({
-      stats,
-      timestamp: new Date().toISOString()
-    });
-
-  } catch (error) {
-    console.error('Error getting stats:', error);
-    res.status(500).json({ 
-      error: 'Failed to get stats',
-      details: error.message 
-    });
+    
+    res.json({ stats, timestamp: new Date().toISOString() });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
 // ============================================
-// ROTAS PROTEGIDAS (POST, DELETE)
+// ROTAS PROTEGIDAS
 // ============================================
 
-// POST - Criar notícia
-app.post('/api/news', authenticateApiKey, (req, res) => {
+// POST News
+app.post('/api/news', requireAuth, (req, res) => {
   try {
-    const { title, description, content, source, author, imageUrl, category, tags, url } = req.body;
-
+    const { title, description, content, source, author, imageUrl, category } = req.body;
+    
     if (!title || !description) {
-      return res.status(400).json({ 
-        error: 'title and description are required' 
-      });
+      return res.status(400).json({ error: 'title and description required' });
     }
-
+    
     const article = {
-      id: generateId('news'),
+      id: `news_${generateId()}`,
       title,
       description,
       content: content || description,
-      source: source || 'User Submission',
+      source: source || 'User',
       author: author || 'Anonymous',
       imageUrl: imageUrl || null,
       category: category || 'general',
-      tags: tags || [],
+      tags: [],
       publishedAt: new Date().toISOString(),
-      url: url || null
+      url: null
     };
-
-    const result = saveToFile('news', article);
-
+    
+    const fileName = saveToFile('news', article);
+    
     res.status(201).json({
       success: true,
-      message: 'News article created successfully',
+      message: 'Created',
       data: article,
-      file: result.fileName
+      file: fileName
     });
-
-  } catch (error) {
-    console.error('Error creating news:', error);
-    res.status(500).json({ 
-      error: 'Failed to create news article',
-      details: error.message 
-    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
-// POST - Criar livro
-app.post('/api/books', authenticateApiKey, (req, res) => {
+// POST Books
+app.post('/api/books', requireAuth, (req, res) => {
   try {
-    const { 
-      title, author, description, category, coverImageURL,
-      digitalPrice, physicalPrice, pages, publisher, isbn, language
-    } = req.body;
-
+    const { title, author, description, category, coverImageURL, digitalPrice, pages, language } = req.body;
+    
     if (!title || !author) {
-      return res.status(400).json({ 
-        error: 'title and author are required' 
-      });
+      return res.status(400).json({ error: 'title and author required' });
     }
-
+    
     const book = {
-      id: generateId('book'),
+      id: `book_${generateId()}`,
       title,
       author,
       description: description || '',
       category: category || 'Geral',
       coverImageURL: coverImageURL || null,
       digitalPrice: digitalPrice || 0,
-      physicalPrice: physicalPrice || 0,
-      digitalFormat: 'PDF, EPUB',
-      hasPhysicalVersion: true,
+      physicalPrice: 0,
+      digitalFormat: 'PDF',
+      hasPhysicalVersion: false,
       pages: pages || 0,
-      publisher: publisher || 'Marketplace',
+      publisher: 'Marketplace',
       publicationYear: new Date().getFullYear().toString(),
-      isbn: isbn || '',
+      isbn: '',
       language: language || 'Português',
       rating: 0,
-      totalReviews: 0,
-      createdAt: new Date().toISOString()
+      totalReviews: 0
     };
-
-    const result = saveToFile('books', book);
-
+    
+    const fileName = saveToFile('books', book);
+    
     res.status(201).json({
       success: true,
-      message: 'Book created successfully',
+      message: 'Created',
       data: book,
-      file: result.fileName
+      file: fileName
     });
-
-  } catch (error) {
-    console.error('Error creating book:', error);
-    res.status(500).json({ 
-      error: 'Failed to create book',
-      details: error.message 
-    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
-// POST - Criar anúncio
-app.post('/api/advertisements', authenticateApiKey, (req, res) => {
+// POST Ads
+app.post('/api/advertisements', requireAuth, (req, res) => {
   try {
-    const { 
-      title, description, imageUrl, actionUrl, actionText,
-      category, backgroundColor, priority, isActive
-    } = req.body;
-
+    const { title, description, imageUrl, actionUrl, actionText, backgroundColor } = req.body;
+    
     if (!title || !description) {
-      return res.status(400).json({ 
-        error: 'title and description are required' 
-      });
+      return res.status(400).json({ error: 'title and description required' });
     }
-
+    
     const ad = {
-      id: generateId('ad'),
+      id: `ad_${generateId()}`,
       title,
       description,
       imageUrl: imageUrl || null,
       actionUrl: actionUrl || '#',
       actionText: actionText || 'Ver Mais',
-      category: category || 'general',
+      category: 'general',
       backgroundColor: backgroundColor || '#1877F2',
-      priority: priority || 1,
-      isActive: isActive !== false,
+      priority: 1,
+      isActive: true,
       startDate: new Date().toISOString(),
-      endDate: new Date(Date.now() + 365*24*60*60*1000).toISOString(),
-      createdAt: new Date().toISOString()
+      endDate: new Date(Date.now() + 365*24*60*60*1000).toISOString()
     };
-
-    const result = saveToFile('advertisements', ad);
-
+    
+    const fileName = saveToFile('advertisements', ad);
+    
     res.status(201).json({
       success: true,
-      message: 'Advertisement created successfully',
+      message: 'Created',
       data: ad,
-      file: result.fileName
+      file: fileName
     });
-
-  } catch (error) {
-    console.error('Error creating advertisement:', error);
-    res.status(500).json({ 
-      error: 'Failed to create advertisement',
-      details: error.message 
-    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
-// POST - Criar avatar
-app.post('/api/avatars', authenticateApiKey, (req, res) => {
+// POST Avatars
+app.post('/api/avatars', requireAuth, (req, res) => {
   try {
     const { name, imageUrl, category, color } = req.body;
-
+    
     if (!name || !imageUrl) {
-      return res.status(400).json({ 
-        error: 'name and imageUrl are required' 
-      });
+      return res.status(400).json({ error: 'name and imageUrl required' });
     }
-
+    
     const avatar = {
-      id: generateId('avatar'),
+      id: `avatar_${generateId()}`,
       name,
       imageUrl,
       category: category || 'general',
-      color: color || '#1877F2',
-      createdAt: new Date().toISOString()
+      color: color || '#1877F2'
     };
-
-    const result = saveToFile('avatars', avatar);
-
+    
+    const fileName = saveToFile('avatars', avatar);
+    
     res.status(201).json({
       success: true,
-      message: 'Avatar created successfully',
+      message: 'Created',
       data: avatar,
-      file: result.fileName
+      file: fileName
     });
-
-  } catch (error) {
-    console.error('Error creating avatar:', error);
-    res.status(500).json({ 
-      error: 'Failed to create avatar',
-      details: error.message 
-    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
-// DELETE - Deletar item
-app.delete('/api/:type/:id', authenticateApiKey, (req, res) => {
+// DELETE
+app.delete('/api/:type/:id', requireAuth, (req, res) => {
   try {
     const { type, id } = req.params;
-    const dirPath = path.join(__dirname, 'public', type);
-
-    if (!fs.existsSync(dirPath)) {
-      return res.status(404).json({ error: 'Type not found' });
+    const dir = path.join(__dirname, 'public', type);
+    
+    if (!fs.existsSync(dir)) {
+      return res.status(404).json({ error: 'Not found' });
     }
-
-    const files = fs.readdirSync(dirPath).filter(f => f.endsWith('.json'));
+    
+    const files = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
     let found = false;
-
+    
     for (const file of files) {
-      const filePath = path.join(dirPath, file);
+      const filePath = path.join(dir, file);
       const content = JSON.parse(fs.readFileSync(filePath, 'utf8'));
       const dataKey = type === 'news' ? 'articles' : type;
-
-      const originalLength = content[dataKey].length;
-      content[dataKey] = content[dataKey].filter(item => item.id !== id);
-
-      if (content[dataKey].length < originalLength) {
+      
+      const original = content[dataKey].length;
+      content[dataKey] = content[dataKey].filter(i => i.id !== id);
+      
+      if (content[dataKey].length < original) {
         found = true;
-        content.metadata.totalItems = content[dataKey].length;
-        content.metadata.lastUpdated = new Date().toISOString();
-
+        
         if (content[dataKey].length === 0) {
           fs.unlinkSync(filePath);
         } else {
+          content.metadata.totalItems = content[dataKey].length;
+          content.metadata.lastUpdated = new Date().toISOString();
           fs.writeFileSync(filePath, JSON.stringify(content, null, 2));
         }
-
+        
         break;
       }
     }
-
+    
     if (!found) {
-      return res.status(404).json({ error: 'Item not found' });
+      return res.status(404).json({ error: 'Not found' });
     }
-
-    res.json({ 
-      success: true,
-      message: 'Item deleted successfully',
-      id 
-    });
-
-  } catch (error) {
-    console.error('Error deleting item:', error);
-    res.status(500).json({ 
-      error: 'Failed to delete item',
-      details: error.message 
-    });
+    
+    res.json({ success: true, message: 'Deleted', id });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -596,33 +484,20 @@ app.delete('/api/:type/:id', authenticateApiKey, (req, res) => {
 // ============================================
 
 app.use((req, res) => {
-  res.status(404).json({
-    error: 'Not found',
-    path: req.path
-  });
+  res.status(404).json({ error: 'Not found' });
 });
 
 app.use((err, req, res, next) => {
-  console.error('Server Error:', err);
-  res.status(500).json({
-    error: 'Internal server error',
-    message: err.message
-  });
+  console.error(err);
+  res.status(500).json({ error: 'Server error' });
 });
 
 // ============================================
-// START SERVER
+// START
 // ============================================
 
 app.listen(PORT, () => {
-  console.log('\n♾️ DATA SERVER - SISTEMA INFINITO');
-  console.log(`📡 URL: http://localhost:${PORT}`);
-  console.log(`🔑 API Key: ${API_KEY}`);
-  console.log('\n📖 Endpoints:');
-  console.log('  GET  /api/:type');
-  console.log('  GET  /api/:type/:id');
-  console.log('  GET  /api/:type/search?q=termo');
-  console.log('  GET  /api/stats');
-  console.log('  POST /api/:type (requer API Key)');
-  console.log('  DELETE /api/:type/:id (requer API Key)\n');
+  console.log(`\n🚀 Server running on port ${PORT}`);
+  console.log(`📡 Health: http://localhost:${PORT}/health`);
+  console.log(`🔑 API Key: ${API_KEY}\n`);
 });

@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - Data Server</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .status.online {
+            background: #10b981;
+            color: white;
+        }
+
+        .status.offline {
+            background: #ef4444;
+            color: white;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            background: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+
+        .tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: 500;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 2px solid #10b981;
+        }
+
+        .alert.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 2px solid #ef4444;
+        }
+
+        .alert.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 2px solid #3b82f6;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f4f6;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .item-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .item-meta {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 5px;
+        }
+
+        .delete-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .delete-btn:hover {
+            background: #dc2626;
+        }
+
+        .api-key-input {
+            position: relative;
+        }
+
+        .api-key-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🚀 Painel Administrativo</h1>
+            <p style="color: #666; margin: 10px 0;">Sistema de gerenciamento de conteúdo</p>
+            <span class="status" id="status">⏳ Verificando...</span>
+        </div>
+
+        <!-- API Key Config -->
+        <div class="tab-content active" id="config-content">
+            <h2 style="margin-bottom: 20px;">🔑 Configuração</h2>
+            <div class="alert info" id="config-alert">
+                Por favor, configure sua API Key para começar.
+            </div>
+            <div class="form-group api-key-input">
+                <label>API Key *</label>
+                <input type="password" id="apiKeyInput" placeholder="Digite sua API Key">
+                <button class="api-key-toggle" onclick="toggleApiKey()">👁️</button>
+            </div>
+            <button class="btn" onclick="saveApiKey()">Salvar e Continuar</button>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs" id="mainTabs" style="display: none;">
+            <button class="tab active" onclick="showTab('news')">📰 Notícias</button>
+            <button class="tab" onclick="showTab('books')">📚 Livros</button>
+            <button class="tab" onclick="showTab('ads')">📢 Anúncios</button>
+            <button class="tab" onclick="showTab('avatars')">👤 Avatares</button>
+            <button class="tab" onclick="showTab('list')">📋 Listar</button>
+        </div>
+
+        <!-- News Tab -->
+        <div class="tab-content" id="news-content">
+            <h2 style="margin-bottom: 20px;">Criar Nova Notícia</h2>
+            <div id="news-alert"></div>
+            <form onsubmit="createNews(event)">
+                <div class="form-group">
+                    <label>Título *</label>
+                    <input type="text" id="newsTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Descrição *</label>
+                    <textarea id="newsDescription" required></textarea>
+                </div>
+                <div class="grid">
+                    <div class="form-group">
+                        <label>Fonte</label>
+                        <input type="text" id="newsSource" placeholder="Ex: Tech News">
+                    </div>
+                    <div class="form-group">
+                        <label>Autor</label>
+                        <input type="text" id="newsAuthor" placeholder="Ex: João Silva">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>URL da Imagem</label>
+                    <input type="url" id="newsImageUrl" placeholder="https://...">
+                </div>
+                <div class="grid">
+                    <div class="form-group">
+                        <label>Categoria</label>
+                        <select id="newsCategory">
+                            <option value="technology">Tecnologia</option>
+                            <option value="business">Negócios</option>
+                            <option value="cryptocurrency">Criptomoedas</option>
+                            <option value="finance">Finanças</option>
+                            <option value="general">Geral</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>URL da Notícia</label>
+                        <input type="url" id="newsUrl" placeholder="https://...">
+                    </div>
+                </div>
+                <button type="submit" class="btn" id="newsSubmitBtn">
+                    Publicar Notícia
+                </button>
+            </form>
+        </div>
+
+        <!-- Books Tab -->
+        <div class="tab-content" id="books-content">
+            <h2 style="margin-bottom: 20px;">Adicionar Novo Livro</h2>
+            <div id="books-alert"></div>
+            <form onsubmit="createBook(event)">
+                <div class="grid">
+                    <div class="form-group">
+                        <label>Título *</label>
+                        <input type="text" id="bookTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Autor *</label>
+                        <input type="text" id="bookAuthor" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea id="bookDescription"></textarea>
+                </div>
+                <div class="grid">
+                    <div class="form-group">
+                        <label>Categoria</label>
+                        <select id="bookCategory">
+                            <option value="Investimentos">Investimentos</option>
+                            <option value="Trading">Trading</option>
+                            <option value="Finanças Pessoais">Finanças Pessoais</option>
+                            <option value="Criptomoedas">Criptomoedas</option>
+                            <option value="Educação Financeira">Educação Financeira</option>
+                            <option value="Empreendedorismo">Empreendedorismo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Preço Digital (Kz)</label>
+                        <input type="number" id="bookPrice" min="0" value="15000">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>URL da Capa</label>
+                    <input type="url" id="bookCoverUrl" placeholder="https://...">
+                </div>
+                <div class="grid">
+                    <div class="form-group">
+                        <label>Páginas</label>
+                        <input type="number" id="bookPages" min="0" value="200">
+                    </div>
+                    <div class="form-group">
+                        <label>Idioma</label>
+                        <select id="bookLanguage">
+                            <option value="Português">Português</option>
+                            <option value="Inglês">Inglês</option>
+                            <option value="Espanhol">Espanhol</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn" id="bookSubmitBtn">
+                    Adicionar Livro
+                </button>
+            </form>
+        </div>
+
+        <!-- Ads Tab -->
+        <div class="tab-content" id="ads-content">
+            <h2 style="margin-bottom: 20px;">Criar Novo Anúncio</h2>
+            <div id="ads-alert"></div>
+            <form onsubmit="createAd(event)">
+                <div class="form-group">
+                    <label>Título *</label>
+                    <input type="text" id="adTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Descrição *</label>
+                    <textarea id="adDescription" required></textarea>
+                </div>
+                <div class="grid">
+                    <div class="form-group">
+                        <label>URL da Imagem</label>
+                        <input type="url" id="adImageUrl" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label>URL de Ação</label>
+                        <input type="url" id="adActionUrl" placeholder="https://...">
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="form-group">
+                        <label>Texto do Botão</label>
+                        <input type="text" id="adActionText" value="Ver Mais">
+                    </div>
+                    <div class="form-group">
+                        <label>Cor de Fundo</label>
+                        <input type="color" id="adBgColor" value="#1877F2">
+                    </div>
+                </div>
+                <button type="submit" class="btn" id="adSubmitBtn">
+                    Criar Anúncio
+                </button>
+            </form>
+        </div>
+
+        <!-- Avatars Tab -->
+        <div class="tab-content" id="avatars-content">
+            <h2 style="margin-bottom: 20px;">Adicionar Novo Avatar</h2>
+            <div id="avatars-alert"></div>
+            <form onsubmit="createAvatar(event)">
+                <div class="form-group">
+                    <label>Nome *</label>
+                    <input type="text" id="avatarName" required>
+                </div>
+                <div class="form-group">
+                    <label>URL da Imagem *</label>
+                    <input type="url" id="avatarImageUrl" required placeholder="https://...">
+                </div>
+                <div class="grid">
+                    <div class="form-group">
+                        <label>Categoria</label>
+                        <select id="avatarCategory">
+                            <option value="abstract">Abstrato</option>
+                            <option value="professional">Profissional</option>
+                            <option value="student">Estudante</option>
+                            <option value="creative">Criativo</option>
+                            <option value="business">Empresarial</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Cor</label>
+                        <input type="color" id="avatarColor" value="#1877F2">
+                    </div>
+                </div>
+                <button type="submit" class="btn" id="avatarSubmitBtn">
+                    Adicionar Avatar
+                </button>
+            </form>
+        </div>
+
+        <!-- List Tab -->
+        <div class="tab-content" id="list-content">
+            <h2 style="margin-bottom: 20px;">📋 Itens Criados</h2>
+            <div id="list-alert"></div>
+            <div class="tabs" style="background: none; box-shadow: none;">
+                <button class="tab active" onclick="listItems('news')">Notícias</button>
+                <button class="tab" onclick="listItems('books')">Livros</button>
+                <button class="tab" onclick="listItems('advertisements')">Anúncios</button>
+                <button class="tab" onclick="listItems('avatars')">Avatares</button>
+            </div>
+            <div class="item-list" id="itemsList">
+                <p style="text-align: center; color: #6b7280;">Selecione uma categoria acima</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let API_KEY = '';
+        const API_BASE_URL = window.location.origin; // Usa a mesma origem, sem CORS!
+
+        // Toggle API Key visibility
+        function toggleApiKey() {
+            const input = document.getElementById('apiKeyInput');
+            const btn = document.querySelector('.api-key-toggle');
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                btn.textContent = '👁️';
+            }
+        }
+
+        // Save API Key
+        function saveApiKey() {
+            const key = document.getElementById('apiKeyInput').value.trim();
+            if (!key) {
+                showAlert('config', 'Por favor, digite uma API Key', 'error');
+                return;
+            }
+            API_KEY = key;
+            localStorage.setItem('apiKey', key);
+            document.getElementById('config-content').style.display = 'none';
+            document.getElementById('mainTabs').style.display = 'flex';
+            showTab('news');
+            checkHealth();
+        }
+
+        // Load API Key on page load
+        window.onload = function() {
+            const savedKey = localStorage.getItem('apiKey');
+            if (savedKey) {
+                API_KEY = savedKey;
+                document.getElementById('apiKeyInput').value = savedKey;
+                document.getElementById('config-content').style.display = 'none';
+                document.getElementById('mainTabs').style.display = 'flex';
+                showTab('news');
+            }
+            checkHealth();
+        };
+
+        // Check server health
+        async function checkHealth() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/health`);
+                const data = await response.json();
+                const statusEl = document.getElementById('status');
+                if (data.status === 'OK') {
+                    statusEl.className = 'status online';
+                    statusEl.textContent = '✓ Online';
+                } else {
+                    throw new Error('Offline');
+                }
+            } catch (error) {
+                const statusEl = document.getElementById('status');
+                statusEl.className = 'status offline';
+                statusEl.textContent = '✗ Offline';
+            }
+        }
+
+        // Show tab
+        function showTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+            document.querySelector(`[onclick="showTab('${tab}')"]`).classList.add('active');
+            document.getElementById(`${tab}-content`).style.display = 'block';
+            
+            if (tab === 'list') {
+                listItems('news');
+            }
+        }
+
+        // Show alert
+        function showAlert(tab, message, type = 'success') {
+            const alertEl = document.getElementById(`${tab}-alert`);
+            alertEl.className = `alert ${type}`;
+            alertEl.textContent = message;
+            setTimeout(() => alertEl.textContent = '', 5000);
+        }
+
+        // Create News
+        async function createNews(event) {
+            event.preventDefault();
+            const btn = document.getElementById('newsSubmitBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span> Publicando...';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/news`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-API-Key': API_KEY
+                    },
+                    body: JSON.stringify({
+                        title: document.getElementById('newsTitle').value,
+                        description: document.getElementById('newsDescription').value,
+                        source: document.getElementById('newsSource').value || 'Web Admin',
+                        author: document.getElementById('newsAuthor').value || 'Admin',
+                        imageUrl: document.getElementById('newsImageUrl').value || null,
+                        category: document.getElementById('newsCategory').value,
+                        url: document.getElementById('newsUrl').value || null,
+                        tags: [document.getElementById('newsCategory').value]
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showAlert('news', `✅ Notícia criada! Arquivo: ${data.file}`, 'success');
+                    event.target.reset();
+                } else {
+                    throw new Error(data.error || 'Erro desconhecido');
+                }
+            } catch (error) {
+                showAlert('news', `❌ Erro: ${error.message}`, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Publicar Notícia';
+            }
+        }
+
+        // Create Book
+        async function createBook(event) {
+            event.preventDefault();
+            const btn = document.getElementById('bookSubmitBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span> Adicionando...';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/books`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-API-Key': API_KEY
+                    },
+                    body: JSON.stringify({
+                        title: document.getElementById('bookTitle').value,
+                        author: document.getElementById('bookAuthor').value,
+                        description: document.getElementById('bookDescription').value,
+                        category: document.getElementById('bookCategory').value,
+                        coverImageURL: document.getElementById('bookCoverUrl').value || null,
+                        digitalPrice: parseInt(document.getElementById('bookPrice').value) || 0,
+                        pages: parseInt(document.getElementById('bookPages').value) || 0,
+                        language: document.getElementById('bookLanguage').value,
+                        hasPhysicalVersion: true
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showAlert('books', `✅ Livro criado! Arquivo: ${data.file}`, 'success');
+                    event.target.reset();
+                } else {
+                    throw new Error(data.error || 'Erro desconhecido');
+                }
+            } catch (error) {
+                showAlert('books', `❌ Erro: ${error.message}`, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Adicionar Livro';
+            }
+        }
+
+        // Create Ad
+        async function createAd(event) {
+            event.preventDefault();
+            const btn = document.getElementById('adSubmitBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span> Criando...';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/advertisements`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-API-Key': API_KEY
+                    },
+                    body: JSON.stringify({
+                        title: document.getElementById('adTitle').value,
+                        description: document.getElementById('adDescription').value,
+                        imageUrl: document.getElementById('adImageUrl').value || null,
+                        actionUrl: document.getElementById('adActionUrl').value || '#',
+                        actionText: document.getElementById('adActionText').value,
+                        backgroundColor: document.getElementById('adBgColor').value,
+                        category: 'general',
+                        priority: 1,
+                        isActive: true
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showAlert('ads', `✅ Anúncio criado! Arquivo: ${data.file}`, 'success');
+                    event.target.reset();
+                } else {
+                    throw new Error(data.error || 'Erro desconhecido');
+                }
+            } catch (error) {
+                showAlert('ads', `❌ Erro: ${error.message}`, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Criar Anúncio';
+            }
+        }
+
+        // Create Avatar
+        async function createAvatar(event) {
+            event.preventDefault();
+            const btn = document.getElementById('avatarSubmitBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span> Adicionando...';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/avatars`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-API-Key': API_KEY
+                    },
+                    body: JSON.stringify({
+                        name: document.getElementById('avatarName').value,
+                        imageUrl: document.getElementById('avatarImageUrl').value,
+                        category: document.getElementById('avatarCategory').value,
+                        color: document.getElementById('avatarColor').value
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showAlert('avatars', `✅ Avatar criado! Arquivo: ${data.file}`, 'success');
+                    event.target.reset();
+                } else {
+                    throw new Error(data.error || 'Erro desconhecido');
+                }
+            } catch (error) {
+                showAlert('avatars', `❌ Erro: ${error.message}`, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Adicionar Avatar';
+            }
+        }
+
+        // List items
+        async function listItems(type) {
+            const listEl = document.getElementById('itemsList');
+            listEl.innerHTML = '<p style="text-align: center;"><span class="loading"></span> Carregando...</p>';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/list/${type}`);
+                const data = await response.json();
+
+                if (data.files && data.files.length > 0) {
+                    let html = '';
+                    for (const file of data.files) {
+                        const fileData = await fetch(`${API_BASE_URL}/${type}/${file}`).then(r => r.json());
+                        const items = fileData[type === 'news' ? 'articles' : type];
+                        
+                        items.forEach(item => {
+                            html += `
+                                <div class="item">
+                                    <div>
+                                        <div class="item-title">${item.title || item.name}</div>
+                                        <div class="item-meta">ID: ${item.id} | Arquivo: ${file}</div>
+                                    </div>
+                                    <button class="delete-btn" onclick="deleteItem('${type}', '${item.id}', '${file}')">
+                                        🗑️ Deletar
+                                    </button>
+                                </div>
+                            `;
+                        });
+                    }
+                    listEl.innerHTML = html;
+                } else {
+                    listEl.innerHTML = '<p style="text-align: center; color: #6b7280;">Nenhum item encontrado</p>';
+                }
+            } catch (error) {
+                listEl.innerHTML = '<p style="text-align: center; color: #ef4444;">Erro ao carregar itens</p>';
+            }
+        }
+
+        // Delete item
+        async function deleteItem(type, id, file) {
+            if (!confirm('Tem certeza que deseja deletar este item?')) return;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/${type}/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-API-Key': API_KEY
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showAlert('list', '✅ Item deletado com sucesso!', 'success');
+                    listItems(type);
+                } else {
+                    throw new Error(data.error || 'Erro ao deletar');
+                }
+            } catch (error) {
+                showAlert('list', `❌ Erro: ${error.message}`, 'error');
+            }
+        }
+
+        // Check health every 30 seconds
+        setInterval(checkHealth, 30000);
+    </script>
+</body>
+</html>

@@ -1,309 +1,33 @@
 {
   "articles": [
-     {
-  "id": "news_1_023",
-  "title": "Anthropic",
-  "description": "Anthropic projeta lucratividade até 2027, superando a OpenAI",
-  "content": "Duas das principais empresas de inteligência artificial do Vale do Silício estão traçando caminhos financeiros totalmente diferentes, com a Anthropic posicionando-se para alcançar lucratividade até 2027, enquanto a OpenAI enfrenta perdas crescentes que podem chegar a US$ 14 bilhões no próximo ano, de acordo com documentos financeiros revisados pelo The Wall Street Journal e The Information.A Anthropic espera gerar até US$ 70 bilhões em receita e US$ 17 bilhões em fluxo de caixa até 2028, com projeções internas mostrando que a empresa alcançará o ponto de equilíbrio em 2027—dois anos antes da lucratividade projetada da OpenAI em 2029. As trajetórias contrastantes destacam estratégias de negócios fundamentalmente diferentes: a abordagem disciplinada com foco empresarial da Anthropic versus o modelo voltado para o consumidor da OpenAI, sobrecarregado por gastos massivos em infraestrutura.\n\nA startup com sede em São Francisco construiu seu negócio em torno de clientes corporativos, que agora representam aproximadamente 80% de sua receita proveniente de mais de 300.000 clientes empresariais. A Anthropic projeta que a receita aumentará de um estimado de US$ 5 bilhões em 2025 para até US$ 70 bilhões até 2028, impulsionada pela rápida adoção de seu chatbot de IA Claude entre empresas.����Parcerias estratégicas estão acelerando esse crescimento. Em outubro, a Salesforce expandiu sua colaboração com a Anthropic, tornando o Claude um modelo preferencial para sua plataforma Agentforce voltada para indústrias regulamentadas, incluindo serviços financeiros e saúde. A Microsoft, tradicionalmente uma parceira exclusiva da OpenAI, começou a integrar os modelos da Anthropic no Microsoft 365 e Copilot em setembro, após testes internos mostrarem que o Claude se destacava na automação de tarefas no Excel e PowerPoint.�����Grandes implementações empresariais estão agora em andamento. A Deloitte está implementando o Claude para mais de 470.000 funcionários em 150 países, enquanto a Cognizant planeja fornecer o assistente de IA para até 350.000 associados globalmente. \"As empresas exigem IA confiável que combine desempenho de ponta com segurança e confiabilidade\", disse Paul Smith, Diretor Comercial da Anthropic.\n\nA reviravolta financeira da Anthropic parece dramática no papel. Espera-se que a margem de lucro bruto da empresa salte de negativos 94% no ano passado para 50% em 2025 e atinja 77% até 2028, de acordo com The Information. Esta melhoria reflete tanto ganhos de eficiência operacional quanto a escalabilidade do seu modelo de negócio business-to-business.\nA ferramenta de desenvolvimento da empresa, Claude Code, emergiu como um motor de crescimento, aproximando-se de US$ 1 bilhão em receita anualizada—acima dos aproximadamente US$ 400 milhões em julho. A receita de API está projetada para atingir US$ 3,8 bilhões este ano, já superando os US$ 1,8 bilhão que se espera que a OpenAI gere a partir de linhas de negócio similares.\nA confiança dos investidores acompanhou. A Anthropic levantou US$ 13 bilhões em setembro com uma avaliação de US$ 183 bilhões, quase triplicando seu valor em relação ao início de 2025. Se a empresa atingir suas metas, analistas projetam uma avaliação futura entre US$ 300 bilhões e US$ 400 bilhões.\n\nPor outro lado, a OpenAI continua a enfrentar dificuldades com a rentabilidade, apesar de gerar aproximadamente $13 mil milhões em receita anual e servir 800 milhões de utilizadores semanais. A empresa perdeu mais de $12 mil milhões apenas no terceiro trimestre de 2025, de acordo com os registos financeiros da Microsoft.\nA OpenAI projeta que as perdas possam atingir $14 mil milhões em 2026, com perdas acumuladas a ascender a $115 mil milhões até 2029, à medida que a empresa aumenta os gastos em infraestrutura. Mesmo com projeções ambiciosas de receita de $100 mil milhões até 2027, a empresa não espera alcançar a rentabilidade até 2029.\nAs fortunas divergentes refletem filosofias diferentes na economia da IA. A OpenAI representa escala de consumo construída sobre acessibilidade e domínio de marca, enquanto a Anthropic incorpora sustentabilidade empresarial apoiada por fluxos de receita recorrentes e disciplina operacional. À medida que o escrutínio regulatório e as exigências de infraestrutura continuam a comprimir as margens em todo o setor, o modelo da Anthropic pode oferecer um modelo para empreendimentos de IA financeiramente viáveis—um onde a utilidade, não a viralidade, impulsiona o valor a longo prazo.",
-  "source": "theinformation.com",
-  "author": "Sri Muppidi",
-  "imageUrl": "https://tii.imgix.net/production/articles/16015/4ace4715-c599-4db1-8ba6-2e9b283891df.png?auto=compress&fit=crop&auto=format&w=400&dpr=2",
-  "category": "Tecnologia",
-  "tags": [],
-  "publishedAt": "2025-11-11T06:46:54.749Z",
-  "url": "https://www.theinformation.com/articles/anthropic-projects-70-billion-revenue-17-billion-cash-flow-2028?utm_source=perplexity"
-},
     {
-      "id": "news_1_001",
-      "title": "COP30 em Belém: Brasil recebe maior conferência sobre mudanças climáticas",
-      "description": "A 30ª Conferência da ONU sobre Mudanças Climáticas acontece em Belém entre 10 e 21 de novembro, reunindo mais de 50 mil participantes de todo o mundo na Amazônia.",
-      "content": "Belém, no Pará, sedia a COP30, a maior conferência global sobre mudanças climáticas, de 10 a 21 de novembro de 2025. O evento marca a segunda vez que o Brasil recebe uma conferência climática da ONU, após a histórica Rio-92. Com a presença de líderes mundiais, cientistas, ONGs e sociedade civil, a COP30 busca definir medidas para limitar o aumento da temperatura global a 1,5ºC e acelerar a implementação do Acordo de Paris. O presidente Lula destacou a importância de discutir a Amazônia diretamente na floresta. A expectativa é de mais de 40 mil visitantes durante o evento, que transformou temporariamente Belém na capital federal do Brasil.",
-      "source": "Agência Brasil",
-      "author": "Redação Agência Brasil",
-      "imageUrl": "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&q=80",
-      "category": "Meio Ambiente",
-      "tags": ["COP30", "Belém", "Mudanças Climáticas", "Amazônia", "ONU", "Sustentabilidade"],
-      "publishedAt": "2025-11-09T08:00:00Z",
-      "url": "https://agenciabrasil.ebc.com.br/cop30"
-    },
-    {
-      "id": "news_1_002",
-      "title": "Angola avança com lei pioneira de Inteligência Artificial",
-      "description": "País lusófono está em consulta pública sobre proposta de lei que estabelece quadro jurídico para desenvolvimento e uso de IA, posicionando-se na vanguarda da regulação tecnológica em África.",
-      "content": "Angola dá um passo importante na regulação da Inteligência Artificial com a abertura de consulta pública sobre proposta de lei pioneira. O diploma estabelece o quadro jurídico para desenvolvimento, fornecimento e uso de IA no país. O diretor do Instituto de Modernização Administrativa (IMA) reforçou que a adoção de políticas públicas e regulamentações para IA é crucial para a agenda de transição digital do país. A iniciativa demonstra o compromisso angolano em equilibrar inovação tecnológica com proteção de direitos e desenvolvimento sustentável, seguindo tendências globais de governança responsável da IA.",
-      "source": "PTI - A Tecnologia em Notícia",
-      "author": "Ferreira Manuel",
-      "imageUrl": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
+      "id": "news_1_023",
+      "title": "Anthropic",
+      "description": "Anthropic projeta lucratividade até 2027, superando a OpenAI",
+      "content": "Duas das principais empresas de inteligência artificial do Vale do Silício estão traçando caminhos financeiros totalmente diferentes, com a Anthropic posicionando-se para alcançar lucratividade até 2027, enquanto a OpenAI enfrenta perdas crescentes que podem chegar a US$ 14 bilhões no próximo ano, de acordo com documentos financeiros revisados pelo The Wall Street Journal e The Information.A Anthropic espera gerar até US$ 70 bilhões em receita e US$ 17 bilhões em fluxo de caixa até 2028, com projeções internas mostrando que a empresa alcançará o ponto de equilíbrio em 2027—dois anos antes da lucratividade projetada da OpenAI em 2029. As trajetórias contrastantes destacam estratégias de negócios fundamentalmente diferentes: a abordagem disciplinada com foco empresarial da Anthropic versus o modelo voltado para o consumidor da OpenAI, sobrecarregado por gastos massivos em infraestrutura.
+
+A startup com sede em São Francisco construiu seu negócio em torno de clientes corporativos, que agora representam aproximadamente 80% de sua receita proveniente de mais de 300.000 clientes empresariais. A Anthropic projeta que a receita aumentará de um estimado de US$ 5 bilhões em 2025 para até US$ 70 bilhões até 2028, impulsionada pela rápida adoção de seu chatbot de IA Claude entre empresas.����Parcerias estratégicas estão acelerando esse crescimento. Em outubro, a Salesforce expandiu sua colaboração com a Anthropic, tornando o Claude um modelo preferencial para sua plataforma Agentforce voltada para indústrias regulamentadas, incluindo serviços financeiros e saúde. A Microsoft, tradicionalmente uma parceira exclusiva da OpenAI, começou a integrar os modelos da Anthropic no Microsoft 365 e Copilot em setembro, após testes internos mostrarem que o Claude se destacava na automação de tarefas no Excel e PowerPoint.�����Grandes implementações empresariais estão agora em andamento. A Deloitte está implementando o Claude para mais de 470.000 funcionários em 150 países, enquanto a Cognizant planeja fornecer o assistente de IA para até 350.000 associados globalmente. "As empresas exigem IA confiável que combine desempenho de ponta com segurança e confiabilidade", disse Paul Smith, Diretor Comercial da Anthropic.
+
+A reviravolta financeira da Anthropic parece dramática no papel. Espera-se que a margem de lucro bruto da empresa salte de negativos 94% no ano passado para 50% em 2025 e atinja 77% até 2028, de acordo com The Information. Esta melhoria reflete tanto ganhos de eficiência operacional quanto a escalabilidade do seu modelo de negócio business-to-business.
+A ferramenta de desenvolvimento da empresa, Claude Code, emergiu como um motor de crescimento, aproximando-se de US$ 1 bilhão em receita anualizada—acima dos aproximadamente US$ 400 milhões em julho. A receita de API está projetada para atingir US$ 3,8 bilhões este ano, já superando os US$ 1,8 bilhão que se espera que a OpenAI gere a partir de linhas de negócio similares.
+A confiança dos investidores acompanhou. A Anthropic levantou US$ 13 bilhões em setembro com uma avaliação de US$ 183 bilhões, quase triplicando seu valor em relação ao início de 2025. Se a empresa atingir suas metas, analistas projetam uma avaliação futura entre US$ 300 bilhões e US$ 400 bilhões.
+
+Por outro lado, a OpenAI continua a enfrentar dificuldades com a rentabilidade, apesar de gerar aproximadamente $13 mil milhões em receita anual e servir 800 milhões de utilizadores semanais. A empresa perdeu mais de $12 mil milhões apenas no terceiro trimestre de 2025, de acordo com os registos financeiros da Microsoft.
+A OpenAI projeta que as perdas possam atingir $14 mil milhões em 2026, com perdas acumuladas a ascender a $115 mil milhões até 2029, à medida que a empresa aumenta os gastos em infraestrutura. Mesmo com projeções ambiciosas de receita de $100 mil milhões até 2027, a empresa não espera alcançar a rentabilidade até 2029.
+As fortunas divergentes refletem filosofias diferentes na economia da IA. A OpenAI representa escala de consumo construída sobre acessibilidade e domínio de marca, enquanto a Anthropic incorpora sustentabilidade empresarial apoiada por fluxos de receita recorrentes e disciplina operacional. À medida que o escrutínio regulatório e as exigências de infraestrutura continuam a comprimir as margens em todo o setor, o modelo da Anthropic pode oferecer um modelo para empreendimentos de IA financeiramente viáveis—um onde a utilidade, não a viralidade, impulsiona o valor a longo prazo.",
+      "source": "theinformation.com",
+      "author": "Sri Muppidi",
+      "imageUrl": "https://tii.imgix.net/production/articles/16015/4ace4715-c599-4db1-8ba6-2e9b283891df.png?auto=compress&fit=crop&auto=format&w=400&dpr=2",
       "category": "Tecnologia",
-      "tags": ["Angola", "Inteligência Artificial", "Legislação", "Tecnologia", "África"],
-      "publishedAt": "2025-11-05T09:30:00Z",
-      "url": "https://pti.ao/inteligencia-artificial-angola"
-    },
-    {
-      "id": "news_1_003",
-      "title": "ANGOTIC 2025: Angola celebra 50 anos de evolução tecnológica",
-      "description": "Maior evento de TIC do país acontece em junho de 2025 com foco em conectividade, IA, DNA digital e cibersegurança, esperando superar 12 mil visitantes.",
-      "content": "O Fórum Internacional de Tecnologias de Informação e Comunicação de Angola (ANGOTIC) foi oficialmente lançado para junho de 2025, sob o lema '50 anos a Comunicar, a Modernizar e a Desenvolver Angola'. O evento decorrerá nos dias 12, 13 e 14 de junho no Hotel de Convenções de Talatona, em Luanda. Com foco em Conectividade, Inteligência Artificial, DNA Digital e Cibersegurança, o ANGOTIC 2025 espera superar os 12 mil visitantes, 70 empresas e 120 startups da edição anterior. O ministro das Telecomunicações destacou que o evento celebra a trajetória do setor desde a independência e aponta para o futuro digital do país.",
-      "source": "PTI - A Tecnologia em Notícia",
-      "author": "Redação PTI",
-      "imageUrl": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
-      "category": "Tecnologia",
-      "tags": ["ANGOTIC", "Angola", "TIC", "Evento", "Inovação", "Tecnologia"],
-      "publishedAt": "2025-11-09T10:00:00Z",
-      "url": "https://pti.ao/angotic-2025"
-    },
-    {
-      "id": "news_1_004",
-      "title": "ANGOSAT-2 expande serviços para África Austral",
-      "description": "Satélite angolano já presta serviços à Zâmbia e realiza testes na África do Sul, impulsionando negócios tecnológicos regionais.",
-      "content": "O satélite ANGOSAT-2 está a expandir significativamente sua cobertura na região da África Austral. O ministro das Telecomunicações, Mário Oliveira, confirmou que o satélite já presta serviços à Zâmbia e encontra-se em fase de testes na África do Sul. Esta expansão representa um marco importante para Angola como operador e produtor de tecnologia espacial no continente africano. O ANGOSAT-2 tem impulsionado negócios tecnológicos não apenas em Angola, mas em toda a região, demonstrando a capacidade do país de contribuir para o desenvolvimento tecnológico africano e consolidar-se como player regional em telecomunicações espaciais.",
-      "source": "INACOM",
-      "author": "Instituto Angolano das Comunicações",
-      "imageUrl": "https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=800&q=80",
-      "category": "Tecnologia",
-      "tags": ["ANGOSAT-2", "Angola", "Satélite", "Telecomunicações", "África"],
-      "publishedAt": "2025-11-09T11:15:00Z",
-      "url": "https://inacom.gov.ao/angosat-2"
-    },
-    {
-      "id": "news_1_005",
-      "title": "Africa Tech Festival 2025 reúne inovadores globais na Cidade do Cabo",
-      "description": "Evento acontece de 11 a 13 de novembro com foco em IA, conectividade e investimento inclusivo, trazendo líderes do OpenAI, Mastercard e ONU.",
-      "content": "O Africa Tech Festival 2025 decorre de 11 a 13 de novembro na Cidade do Cabo, reunindo influentes vozes globais em tecnologia, governo e negócios. O evento apresenta quatro trilhas principais: AfricaCom, AfricaTech, AfricaIgnite e The AI Summit Cape Town. Entre os palestrantes destacam-se Emmanuel Lubanzadio, Diretor Sénior para África do OpenAI, Mark Elliott, Presidente para África da Mastercard, e Bernardo Mariano Junior, Secretário-Geral Assistente e CIO das Nações Unidas. Os temas centrais incluem Inovação Responsável, Investimento Inclusivo, Conectividade para Desenvolvimento e Harmonização de Políticas, refletindo os desafios e oportunidades da economia digital africana.",
-      "source": "TechBuild Africa",
-      "author": "Kadi Diallo",
-      "imageUrl": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
-      "category": "Tecnologia",
-      "tags": ["África", "Tecnologia", "IA", "Inovação", "Conferência"],
-      "publishedAt": "2025-11-09T08:30:00Z",
-      "url": "https://techbuild.africa/africa-tech-festival-2025"
-    },
-    {
-      "id": "news_1_006",
-      "title": "África projeta crescimento de 4,4% em 2025 com tecnologia como motor",
-      "description": "Relatório Africa Outlook destaca energia, agronegócio e tecnologia como principais impulsionadores, com foco em startups de fintech, agritech e edtech.",
-      "content": "O relatório Africa Outlook 2025, da Economist Intelligence Unit, projeta crescimento económico de 4,4% para o continente africano. Tecnologia, energia e agronegócio são identificados como os principais motores de crescimento. A revolução digital está em pleno curso, com startups nos setores de fintech, agritech e edtech a atrair investidores globais e transformar economias locais. O relatório destaca que o avanço tecnológico será um dos principais impulsionadores de crescimento económico e inclusão social em 2025, permitindo maior acesso a serviços essenciais como educação e saúde. Países como Nigéria e Angola mantêm protagonismo enquanto investimentos em energias renováveis ganham força.",
-      "source": "O.Económico",
-      "author": "Economist Intelligence Unit",
-      "imageUrl": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80",
-      "category": "Economia",
-      "tags": ["África", "Economia", "Crescimento", "Tecnologia", "Inovação"],
-      "publishedAt": "2025-11-09T09:00:00Z",
-      "url": "https://oeconomico.com/africa-2025-crescimento"
-    },
-    {
-      "id": "news_1_007",
-      "title": "ANDA capta 3 milhões de euros para revolucionar mobilidade em Angola",
-      "description": "Startup angolana recebe investimento significativo para transformar setor de transporte com soluções tecnológicas inovadoras.",
-      "content": "A startup angolana ANDA conseguiu captar 3 milhões de euros em financiamento para revolucionar o setor de mobilidade em Angola. O investimento representa uma aposta forte na capacidade de inovação tecnológica local e na transformação do transporte urbano no país. A empresa planeja utilizar os recursos para expandir suas operações e desenvolver soluções tecnológicas que melhorem a eficiência e acessibilidade dos transportes em centros urbanos angolanos. Este investimento marca um momento importante para o ecossistema de startups em Angola e demonstra a crescente confiança de investidores em empreendimentos tecnológicos africanos.",
-      "source": "PTI - A Tecnologia em Notícia",
-      "author": "Joaquim Cassicato",
-      "imageUrl": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&q=80",
-      "category": "Startups",
-      "tags": ["Angola", "Startup", "Mobilidade", "Investimento", "Inovação"],
-      "publishedAt": "2025-11-06T14:00:00Z",
-      "url": "https://pti.ao/anda-investimento"
-    },
-    {
-      "id": "news_1_008",
-      "title": "Angola conquista 15 medalhas na Feira Internacional de Invenções",
-      "description": "Delegação angolana brilha em competição internacional, demonstrando capacidade de inovação e criatividade tecnológica.",
-      "content": "Angola obteve resultado histórico na Feira Internacional de Invenções, conquistando 15 medalhas com projetos desenvolvidos por inventores nacionais. O desempenho excecional da delegação angolana demonstra o potencial criativo e inovador do país em diversas áreas tecnológicas. As invenções premiadas abrangem desde soluções para agricultura até dispositivos tecnológicos, refletindo a diversidade e qualidade da produção científica e tecnológica angolana. Este resultado reforça a importância de investimentos em educação científica e tecnológica, e posiciona Angola como país com crescente capacidade de inovação no cenário internacional.",
-      "source": "PTI - A Tecnologia em Notícia",
-      "author": "Papiro Ngola",
-      "imageUrl": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
-      "category": "Inovação",
-      "tags": ["Angola", "Inovação", "Invenções", "Tecnologia", "Prémios"],
-      "publishedAt": "2025-11-07T10:30:00Z",
-      "url": "https://pti.ao/feira-invencoes-angola"
-    },
-    {
-      "id": "news_1_009",
-      "title": "Inteligência Artificial: Novos modelos superam expectativas em raciocínio",
-      "description": "Empresas de tecnologia lançam modelos de IA com capacidades aprimoradas de análise lógica e resolução de problemas complexos.",
-      "content": "Em novembro de 2025, o setor de inteligência artificial testemunha avanços significativos com o lançamento de novos modelos de linguagem. As principais empresas de tecnologia apresentaram sistemas com capacidades ampliadas de raciocínio, análise de dados e processamento de informações complexas. Os novos modelos demonstram melhorias substanciais em tarefas que exigem pensamento crítico, matemática avançada e compreensão contextual profunda. Especialistas destacam que esses avanços representam um salto qualitativo na capacidade das máquinas de auxiliar em pesquisas científicas, análise de dados médicos e resolução de problemas técnicos complexos. A comunidade científica internacional debate as implicações éticas e práticas dessas tecnologias emergentes.",
-      "source": "TechCrunch",
-      "author": "Sarah Mitchell",
-      "imageUrl": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
-      "category": "Tecnologia",
-      "tags": ["Inteligência Artificial", "IA", "Machine Learning", "Tecnologia", "Inovação"],
-      "publishedAt": "2025-11-09T10:30:00Z",
-      "url": "https://techcrunch.com/ai-advancements"
-    },
-    {
-      "id": "news_1_010",
-      "title": "Mercados asiáticos lideram crescimento económico global",
-      "description": "China, Índia e países do Sudeste Asiático apresentam desempenho robusto impulsionado por tecnologia e exportações.",
-      "content": "Os mercados asiáticos apresentam desempenho excepcional no final de 2025, com destaque para China, Índia e países do Sudeste Asiático. Dados económicos revelam crescimento consistente impulsionado pela forte demanda por tecnologia, manufaturas e serviços digitais. A região Ásia-Pacífico consolida-se como motor do crescimento global, com investimentos massivos em infraestrutura, energia renovável e inovação tecnológica. Analistas económicos projetam que essa tendência deve continuar em 2026, com potencial de influenciar políticas económicas em escala mundial. O Fundo Monetário Internacional ajustou suas previsões de crescimento global considerando o desempenho acima do esperado da região.",
-      "source": "Bloomberg",
-      "author": "Michael Chen",
-      "imageUrl": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80",
-      "category": "Economia",
-      "tags": ["Economia", "Mercados", "Ásia", "Crescimento", "Finanças"],
-      "publishedAt": "2025-11-09T12:15:00Z",
-      "url": "https://bloomberg.com/asia-markets"
-    },
-    {
-      "id": "news_1_011",
-      "title": "Cinco países africanos concentram metade do PIB continental",
-      "description": "Nigéria, África do Sul, Egito, Argélia e Etiópia geram cerca de 1,4 trilhões de dólares, metade da economia africana.",
-      "content": "Dados recentes do FMI revelam concentração económica significativa em África: cinco nações respondem por quase 50% do PIB total do continente. Nigéria, África do Sul, Egito, Argélia e Etiópia geram juntas cerca de 1,4 trilhões de dólares. A Nigéria mantém-se como maior economia africana, enquanto a África do Sul lidera no Sul. Projeções indicam que o Egito pode ultrapassar a África do Sul até 2027. A Etiópia destaca-se como motor de crescimento na África Oriental através de rápida industrialização. Especialistas apontam que o futuro de África depende de como nações menores alavancam inovação, tecnologia e capital humano para fechar a lacuna e garantir crescimento inclusivo.",
-      "source": "Visual Capitalist / FMI",
-      "author": "João Palmeiro",
-      "imageUrl": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80",
-      "category": "Economia",
-      "tags": ["África", "Economia", "PIB", "Desenvolvimento", "Finanças"],
-      "publishedAt": "2025-11-06T15:40:00Z",
-      "url": "https://postal.pt/africa-pib"
-    },
-    {
-      "id": "news_1_012",
-      "title": "Avanços em terapia genética prometem tratamentos personalizados",
-      "description": "Pesquisadores desenvolvem técnicas de edição genética que podem revolucionar tratamento de doenças hereditárias e câncer.",
-      "content": "A medicina personalizada dá um passo gigante com recentes avanços em terapia genética anunciados em novembro de 2025. Equipes internacionais de cientistas desenvolveram técnicas mais precisas e seguras de edição genética, abrindo possibilidades para tratamento de doenças anteriormente consideradas incuráveis. Os novos protocolos mostram eficácia promissora no combate a doenças hereditárias raras, certos tipos de câncer e distúrbios genéticos. Ensaios clínicos em fase avançada demonstram resultados encorajadores com mínimos efeitos colaterais. A comunidade médica celebra essas descobertas como um marco na medicina moderna, enquanto órgãos reguladores trabalham para estabelecer diretrizes éticas e protocolos de segurança.",
-      "source": "Nature Medicine",
-      "author": "Dr. Emily Rodriguez",
-      "imageUrl": "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=800&q=80",
-      "category": "Saúde",
-      "tags": ["Saúde", "Medicina", "Terapia Genética", "Ciência", "Pesquisa"],
-      "publishedAt": "2025-11-09T14:45:00Z",
-      "url": "https://nature.com/medicine/gene-therapy"
-    },
-    {
-      "id": "news_1_013",
-      "title": "Mundial de Clubes FIFA 2025 inicia nova era do futebol de clubes",
-      "description": "Competição com 32 equipas estreia entre 15 de junho e 13 de julho nos Estados Unidos com formato revolucionário.",
-      "content": "O Mundial de Clubes FIFA 2025 marca uma transformação histórica no futebol de clubes mundial. Pela primeira vez, 32 equipas de todos os continentes competirão num formato similar à Copa do Mundo, realizado entre 15 de junho e 13 de julho nos Estados Unidos. Benfica e FC Porto representam Portugal, enquanto gigantes como Real Madrid, Manchester City, Bayern München e Paris Saint-Germain também confirmaram presença. A competição quadrienal promete ser um dos eventos mais aguardados do calendário futebolístico, trazendo confrontos inéditos entre os melhores clubes do planeta. O torneio apresentou troféu banhado a ouro de 24 quilates, criado pela joalheria Tiffany & Co.",
-      "source": "FIFA",
-      "author": "Redação FIFA",
-      "imageUrl": "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&q=80",
-      "category": "Desporto",
-      "tags": ["Futebol", "Mundial de Clubes", "FIFA", "Desporto", "Competição"],
-      "publishedAt": "2025-11-09T16:00:00Z",
-      "url": "https://fifa.com/mundial-clubes-2025"
-    },
-    {
-      "id": "news_1_014",
-      "title": "Portugal goleia 6-1 na estreia do Mundial Sub-17 no Qatar",
-      "description": "Campeões europeus iniciam competição com vitória expressiva sobre Nova Caledónia após começo difícil.",
-      "content": "A seleção portuguesa de sub-17 estreou no Mundial do Qatar com goleada por 6-1 sobre a Nova Caledónia. Depois de sofrer golo de penálti aos 11 minutos, Portugal respondeu com tentos de Anísio Cabral (22' e 47'), Stevan Manuel (53'), Mateus Mide (59'), Mauro Furtado (85') e José Neto (90'+7'). Os campeões europeus lideram o Grupo B ao lado do Japão, que derrotou Marrocos por 2-0. Esta é a quarta participação de Portugal num Mundial Sub-17, após 1989, 1995 e 2003. A seleção enfrenta Marrocos na quinta-feira e fecha a fase de grupos contra o Japão no domingo.",
-      "source": "PÚBLICO",
-      "author": "Lusa",
-      "imageUrl": "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&q=80",
-      "category": "Desporto",
-      "tags": ["Futebol", "Portugal", "Mundial Sub-17", "Qatar", "Desporto"],
-      "publishedAt": "2025-11-03T17:30:00Z",
-      "url": "https://publico.pt/desporto/mundial-sub17-portugal"
-    },
-    {
-      "id": "news_1_015",
-      "title": "Data FIFA de novembro: última pausa internacional de 2025",
-      "description": "Seleções disputam amistosos e eliminatórias entre 10 e 18 de novembro, com Brasil enfrentando Senegal e Tunísia.",
-      "content": "A última Data FIFA de 2025 acontece entre 10 e 18 de novembro, movimentando o futebol internacional com amistosos e eliminatórias da UEFA, CONCACAF, AFC e AFCON. A seleção brasileira, comandada por Carlo Ancelotti, enfrenta Senegal no dia 15 e Tunísia no dia 18 de novembro. Portugal joga contra Irlanda e Armênia nas eliminatórias europeias. Com 28 das 42 seleções da Copa do Mundo 2026 já classificadas, muitos jogos servem como preparação para o mundial que estreia novo formato expandido. Europa e Américas dominam o calendário com mais de 60 partidas programadas nos nove dias de pausa.",
-      "source": "Olympics.com",
-      "author": "Redação Olympics",
-      "imageUrl": "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&q=80",
-      "category": "Desporto",
-      "tags": ["Futebol", "Data FIFA", "Seleções", "Eliminatórias", "Amistosos"],
-      "publishedAt": "2025-11-04T09:00:00Z",
-      "url": "https://olympics.com/data-fifa-novembro-2025"
-    },
-    {
-      "id": "news_1_016",
-      "title": "Brasil apresenta tecnologias de pecuária tropical na Etiópia",
-      "description": "Delegação brasileira participa da ALEC com soluções em genética, nutrição e manejo adaptadas ao clima africano.",
-      "content": "O Ministério da Agricultura e Pecuária do Brasil participou da African Livestock Exhibition and Congress (ALEC) na Etiópia, apresentando tecnologias da pecuária tropical. O Pavilhão Brasil reuniu empresas e instituições com soluções em genética, nutrição, reprodução e manejo adaptadas ao clima tropical. O diretor técnico da Associação Brasileira dos Criadores de Zebu destacou que o Brasil tem muito a contribuir com a pecuária africana, compartilhando conhecimento e tecnologias desenvolvidas para climas semelhantes. O evento incluiu reuniões bilaterais, visitas técnicas e seminário setorial, fortalecendo cooperação Brasil-África no agronegócio e abrindo oportunidades para novos negócios e parcerias tecnológicas.",
-      "source": "CenárioMT",
-      "author": "Celso Ferreira Nery",
-      "imageUrl": "https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=800&q=80",
-      "category": "Agronegócio",
-      "tags": ["Brasil", "África", "Pecuária", "Tecnologia", "Cooperação"],
-      "publishedAt": "2025-11-07T10:00:00Z",
-      "url": "https://cenariomt.com.br/brasil-africa-pecuaria"
-    },
-    {
-      "id": "news_1_017",
-      "title": "Angola subscreve Convenção da ONU para combater cibercrime",
-      "description": "País reforça compromisso com segurança digital ao aderir a convenção internacional de combate ao crime cibernético.",
-      "content": "Angola formalizou sua adesão à Convenção da ONU para combate ao cibercrime, reforçando o compromisso do país com a segurança digital e a cooperação internacional. A subscrição representa passo importante na construção de um ecossistema digital mais seguro e confiável. O acordo permitirá a Angola aceder a mecanismos de cooperação internacional para investigação e combate a crimes cibernéticos, incluindo fraudes online, ataques a infraestruturas críticas e violações de dados. A medida alinha-se com os esforços do governo angolano em modernizar o quadro legal das tecnologias de informação, que inclui também propostas de lei sobre Inteligência Artificial e Cibersegurança.",
-      "source": "PTI - A Tecnologia em Notícia",
-      "author": "Joaquim Cassicato",
-      "imageUrl": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
-      "category": "Cibersegurança",
-      "tags": ["Angola", "Cibersegurança", "ONU", "Legislação", "Crime Digital"],
-      "publishedAt": "2025-11-08T11:00:00Z",
-      "url": "https://pti.ao/angola-convencao-cibercrime"
-    },
-    {
-      "id": "news_1_018",
-      "title": "EMIS movimenta 80 mil milhões de Kz via levantamentos em Angola",
-      "description": "Sistema de pagamentos angolano registra volume expressivo de transações, demonstrando crescimento da economia digital.",
-      "content": "O sistema EMIS (Empresa Interbancária de Serviços) registou movimentação superior a 80 mil milhões de kwanzas em operações de levantamento, refletindo a crescente digitalização financeira em Angola. Os números demonstram a consolidação dos sistemas de pagamento eletrónicos e o aumento da confiança da população nos serviços financeiros digitais. A EMIS, responsável pela interligação dos sistemas de pagamento das instituições financeiras angolanas, tem desempenhado papel crucial na modernização do setor bancário do país. O volume expressivo de transações evidencia o crescimento da economia digital e a importância da infraestrutura tecnológica financeira para o desenvolvimento económico de Angola.",
-      "source": "PTI - A Tecnologia em Notícia",
-      "author": "Papiro Ngola",
-      "imageUrl": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80",
-      "category": "Finanças",
-      "tags": ["Angola", "EMIS", "Pagamentos", "Fintech", "Economia Digital"],
-      "publishedAt": "2025-11-05T13:30:00Z",
-      "url": "https://pti.ao/emis-movimentacao"
-    },
-    {
-      "id": "news_1_019",
-      "title": "Sistec abre nova loja Hi-Teck no Belas Shopping em Luanda",
-      "description": "Empresa angolana de tecnologia expande rede de lojas com nova unidade em centro comercial premium.",
-      "content": "A Sistec, uma das principais empresas de tecnologia em Angola, inaugurou nova loja Hi-Teck no Belas Shopping, em Luanda. A expansão representa aposta no crescimento do mercado de tecnologia angolano e na crescente demanda por produtos e serviços tecnológicos de qualidade. A nova loja oferece ampla gama de produtos tecnológicos, desde smartphones e computadores até soluções para empresas. A localização estratégica no Belas Shopping, um dos principais centros comerciais da capital, visa proporcionar melhor experiência aos clientes e facilitar acesso a produtos e serviços tecnológicos. A inauguração reforça a posição da Sistec como referência no setor de tecnologia em Angola.",
-      "source": "PTI - A Tecnologia em Notícia",
-      "author": "Redação PTI",
-      "imageUrl": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80",
-      "category": "Negócios",
-      "tags": ["Angola", "Sistec", "Tecnologia", "Varejo", "Luanda"],
-      "publishedAt": "2025-11-04T15:00:00Z",
-      "url": "https://pti.ao/sistec-belas-shopping"
-    },
-    {
-      "id": "news_1_020",
-      "title": "Startup angolana desenvolve solução de agricultura inteligente",
-      "description": "Plataforma usa IoT e IA para monitorizar culturas e otimizar produção agrícola em Angola.",
-      "content": "Uma startup angolana apresentou solução inovadora de agricultura inteligente que utiliza Internet das Coisas (IoT) e Inteligência Artificial para monitorizar culturas e otimizar a produção agrícola. A plataforma permite aos agricultores acompanhar em tempo real condições do solo, humidade, temperatura e necessidades de irrigação através de sensores conectados. O sistema fornece recomendações personalizadas baseadas em análise de dados, ajudando a aumentar a produtividade e reduzir desperdícios. A iniciativa representa exemplo da aplicação de tecnologia para resolver desafios locais e contribuir para a segurança alimentar. A solução já está em fase piloto em diversas fazendas angolanas com resultados promissores.",
-      "source": "AngoStartup",
-      "author": "Maria Fernandes",
-      "imageUrl": "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=80",
-      "category": "Agritech",
-      "tags": ["Angola", "Startup", "Agricultura", "IoT", "IA", "Inovação"],
-      "publishedAt": "2025-11-08T09:00:00Z",
-      "url": "https://angostartup.com/agritech-solucao"
-    },
-    {
-      "id": "news_1_021",
-      "title": "Copa do Mundo Feminina 2025 bate recordes históricos de audiência",
-      "description": "Torneio na Austrália estabelece novos marcos para o futebol feminino com público recorde e engajamento digital sem precedentes.",
-      "content": "A Copa do Mundo Feminina de 2025, sediada na Austrália, estabelece novos marcos históricos para o desporto feminino mundial. O torneio registou recordes absolutos de público nos estádios, audiência televisiva e engajamento nas plataformas digitais, superando todas as edições anteriores. Especialistas apontam que a qualidade técnica excepcional das partidas, combinada com investimentos robustos em marketing e infraestrutura, contribuiu decisivamente para o sucesso do evento. Federações nacionais de futebol em todo o mundo relatam aumento exponencial no interesse por programas de desenvolvimento do futebol feminino. Patrocinadores confirmam compromissos financeiros de longo prazo, sinalizando amadurecimento comercial da modalidade. A FIFA anunciou expansão significativa de investimentos em competições femininas e programas de base em todos os continentes.",
-      "source": "ESPN",
-      "author": "Marcus Silva",
-      "imageUrl": "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80",
-      "category": "Desporto",
-      "tags": ["Futebol Feminino", "Copa do Mundo", "Austrália", "Desporto", "Recordes"],
-      "publishedAt": "2025-11-09T16:30:00Z",
-      "url": "https://espn.com/womens-world-cup-2025"
-    },
-    {
-      "id": "news_1_022",
-      "title": "Energias renováveis atingem 30% da matriz energética africana",
-      "description": "Continente acelera transição energética com investimentos massivos em solar, eólica e hídrica.",
-      "content": "África alcança marco histórico com energias renováveis representando 30% da matriz energética continental. O crescimento acelerado resulta de investimentos massivos em energia solar, eólica e hídrica nos últimos anos. Países como Marrocos, Quénia e África do Sul lideram a transformação com projetos ambiciosos de parques solares e eólicos. A transição energética não apenas contribui para combate às mudanças climáticas, mas também melhora acesso à eletricidade em áreas rurais através de soluções descentralizadas. Organizações internacionais destacam África como região com maior potencial de crescimento em renováveis nas próximas décadas, podendo tornar-se líder global em energia limpa.",
-      "source": "Africa Energy Forum",
-      "author": "Dr. Amara Diop",
-      "imageUrl": "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80",
-      "category": "Energia",
-      "tags": ["África", "Energia Renovável", "Sustentabilidade", "Solar", "Eólica"],
-      "publishedAt": "2025-11-07T14:00:00Z",
-      "url": "https://africaenergyforum.com/renewables-2025"
+      "tags": [],
+      "publishedAt": "2025-11-11T06:46:54.749Z",
+      "url": "https://www.theinformation.com/articles/anthropic-projects-70-billion-revenue-17-billion-cash-flow-2028?utm_source=perplexity"
     }
   ],
   "metadata": {
     "version": "1.0.0",
     "fileNumber": 1,
-    "totalArticles": 22,
-    "lastUpdated": "2025-11-09T17:00:00Z"
+    "totalArticles": 1,
+    "lastUpdated": "2025-11-11T06:46:54.749Z"
   }
 }

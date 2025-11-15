@@ -1,0 +1,36 @@
+{
+  "articles": [
+    {
+      "id": "8363638278",
+      "title": "Exposição de Design Ferrari inaugura novo espaço no MAUTO em Turim",
+      "description": "O Museu Nacional do Automóvel em Turim inaugurou uma nova área de 2.000 metros quadrados dedicada ao design automotivo e industrial, com uma exposição inaugural focada na evolução do design Ferrari entre 2010 e 2025.",
+      "content": "O MAUTO abriu o espaço 'Sulle strade del design' para explorar o design automotivo e industrial, começando com a exposição 'Ferrari Design. Creative Journeys 2010-2025'. A mostra apresenta 11 veículos Ferrari projetados pelo Ferrari Style Center sob o comando de Flavio Manzoni, destacando modelos icônicos como o LaFerrari híbrido (2013), Monza SP1 vencedor do Prêmio Compasso d'Oro (2018) e o F80 (2024). A exposição inclui desenhos, maquetes e documentos mostrando o processo criativo.",
+      "source": "MAUTO, Auto&Design",
+      "author": "Silvia Baruffaldi",
+      "imageUrl": "",
+      "category": "Automobilismo, Design",
+      "tags": ["Ferrari", "Design", "Exposição", "MAUTO", "Turim", "Flavio Manzoni", "Automóveis"],
+      "publishedAt": "2025-11-13T00:00:00Z",
+      "url": ""
+    },
+    {
+      "id": "108262",
+      "title": "Nova seção permanente destaca carros históricos e ícones do design italiano",
+      "description": "O MAUTO junto com a Triennale Milano criou uma seção permanente com 12 casos de estudo sobre carros marcantes na história do design e ícones do design italiano em mobiliário e objetos.",
+      "content": "A seção permanente traz veículos importantes desde o Fiat 3 ½ HP (1899) até o Hyundai Ioniq 5 (2021). Paralelamente, expõe peças clássicas do design italiano como a Poltrona Tre Pezzi e a luminária Toio, destacando a integração entre design automotivo e industrial. O presidente do MAUTO e a diretora enfatizam a importância do design como linguagem global e manifestação cultural do desenvolvimento tecnológico.",
+      "source": "MAUTO, Triennale Milano, Il Torinese",
+      "author": "Benedetto Camerana, Lorenza Bravetta",
+      "imageUrl": "",
+      "category": "Design, Cultura",
+      "tags": ["MAUTO", "Design Italiano", "Carros Históricos", "Triennale Milano", "Exposição Permanente"],
+      "publishedAt": "2025-11-13T00:00:00Z",
+      "url": ""
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "fileNumber": 5,
+    "totalArticles": 2,
+    "lastUpdated": "2025-11-15T16:00:00Z"
+  }
+}

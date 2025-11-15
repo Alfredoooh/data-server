@@ -1,0 +1,23 @@
+{
+  "articles": [
+    {
+      "id": "3",
+      "title": "Data Protection Gets Multi-Agent Support",
+      "description": "Druva, em parceria com Amazon Web Services, apresenta copiloto de múltiplos agentes para proteção de dados, aumentando a eficiência e a precisão nas operações críticas.",
+      "content": "Druva, em parceria com Amazon Web Services, detalhou em 14 de novembro um copiloto multi-agente para proteção de dados. Construído com Amazon Bedrock AgentCore, o sistema conta com agentes especializados para recuperação de dados, funções de help desk e ações críticas, como iniciar jobs de backup. O copiloto alcançou uma precisão de 91-93% na seleção de APIs durante testes e reduziu o tempo de investigação de horas para minutos em casos do setor financeiro. O mercado global de AI agentic projeta crescimento de US$ 7,29 bilhões em 2025 para US$ 88,35 bilhões até 2032.",
+      "source": "Notícias Corporativas de Tecnologia",
+      "author": "Perplexity AI",
+      "imageUrl": "https://media.gettyimages.com/id/2245757304/photo/cisco-systems-photo-illustration.webp?s=612x612&w=gi&k=20&c=ctKyxGgsagAuS6bvlErIdkihYj9rtQFkIe9IPg4Sg8o=",
+      "category": "Tecnologia / Segurança de Dados",
+      "tags": ["AI agentic", "proteção de dados", "Druva", "AWS", "inteligência artificial", "segurança"],
+      "publishedAt": "2025-11-14T00:00:00Z",
+      "url": "https://example.com/noticias/data-protection-gets-multi-agent-support"
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "fileNumber": 3,
+    "totalArticles": 3,
+    "lastUpdated": "2025-11-15T13:34:00Z"
+  }
+}

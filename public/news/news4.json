@@ -12,12 +12,25 @@
       "tags": ["OpenAI", "ChatGPT", "Em Dash", "AI Personalization", "Sam Altman"],
       "publishedAt": "2025-11-13T00:00:00Z",
       "url": "https://techcrunch.com/2025/11/13/openai-fixes-chatgpt-em-dash-problem"
+    },
+    {
+      "id": "6",
+      "title": "Apple accelerates succession plans as Tim Cook prepares to step down",
+      "description": "Apple is intensifying its preparation for CEO Tim Cook's potential departure as soon as next year, with John Ternus emerging as the leading successor candidate.",
+      "content": "Apple has intensified internal preparations for a leadership transition, with Tim Cook poised to step down as chief executive possibly next year after more than 14 years. John Ternus, senior vice president of hardware engineering, is seen as the frontrunner to take over, though no final decision has been made. The transition is part of a carefully managed succession plan unrelated to current company performance. The announcement likely will come after Apple’s January 2026 earnings report. This change comes amid other executive shifts, including the retirement of COO Jeff Williams and CFO Luca Maestri stepping down earlier in 2025. The move reflects Apple's strategy to maintain stability and momentum in innovation and key product launches.",
+      "source": "Financial Times / DimSum Daily",
+      "author": "Various sources",
+      "imageUrl": "",
+      "category": "Business",
+      "tags": ["Apple", "Tim Cook", "CEO Succession", "John Ternus", "Leadership Transition"],
+      "publishedAt": "2025-11-14T00:00:00Z",
+      "url": "https://dimsumdaily.hk/apple-accelerates-succession-plans-tim-cook-step-down"
     }
   ],
   "metadata": {
-    "version": "1.0",
-    "fileNumber": 4,
-    "totalArticles": 4,
-    "lastUpdated": "2025-11-15T13:37:00Z"
+    "version": "1.1",
+    "fileNumber": 5,
+    "totalArticles": 5,
+    "lastUpdated": "2025-11-15T15:50:00Z"
   }
 }

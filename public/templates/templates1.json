@@ -1,0 +1,389 @@
+{
+  "templates": [
+    {
+      "id": "curriculum_001",
+      "name": "Currículo Profissional Moderno",
+      "description": "Template clean e profissional para todas as áreas",
+      "category": "curriculum",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/curriculum_001_page1.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/curriculum_001_page2.jpg"
+      ],
+      "usageCount": 1250,
+      "createdBy": "Design Team",
+      "createdAt": "2025-01-15T10:00:00Z"
+    },
+    {
+      "id": "curriculum_002",
+      "name": "CV Criativo com Portfólio",
+      "description": "Ideal para designers e profissionais criativos",
+      "category": "curriculum",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/curriculum_002_page1.jpg"
+      ],
+      "usageCount": 890,
+      "createdBy": "Creative Studio",
+      "createdAt": "2025-01-10T14:30:00Z"
+    },
+    {
+      "id": "curriculum_003",
+      "name": "Currículo Minimalista",
+      "description": "Design limpo e objetivo para profissionais experientes",
+      "category": "curriculum",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/curriculum_003.jpg"
+      ],
+      "usageCount": 2340,
+      "createdBy": "Minimal Studio",
+      "createdAt": "2025-01-18T08:00:00Z"
+    },
+    {
+      "id": "curriculum_004",
+      "name": "CV Tech - Desenvolvedor",
+      "description": "Template específico para área de tecnologia",
+      "category": "curriculum",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/curriculum_004_page1.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/curriculum_004_page2.jpg"
+      ],
+      "usageCount": 1780,
+      "createdBy": "Tech Team",
+      "createdAt": "2025-01-20T10:30:00Z"
+    },
+    {
+      "id": "curriculum_005",
+      "name": "Currículo Executivo",
+      "description": "Template premium para cargos de gestão",
+      "category": "curriculum",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/curriculum_005.jpg"
+      ],
+      "usageCount": 950,
+      "createdBy": "Executive Designs",
+      "createdAt": "2025-01-22T14:00:00Z"
+    },
+    {
+      "id": "certificate_001",
+      "name": "Certificado de Participação",
+      "description": "Certificado elegante para eventos e cursos",
+      "category": "certificate",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/certificate_001.jpg"
+      ],
+      "usageCount": 2100,
+      "createdBy": "Events Team",
+      "createdAt": "2025-01-12T09:00:00Z"
+    },
+    {
+      "id": "certificate_002",
+      "name": "Certificado de Conclusão Premium",
+      "description": "Design premium com bordas douradas",
+      "category": "certificate",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/certificate_002.jpg"
+      ],
+      "usageCount": 1670,
+      "createdBy": "Premium Designs",
+      "createdAt": "2025-01-08T16:45:00Z"
+    },
+    {
+      "id": "certificate_003",
+      "name": "Certificado de Reconhecimento",
+      "description": "Template formal para reconhecimento profissional",
+      "category": "certificate",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/certificate_003.jpg"
+      ],
+      "usageCount": 1420,
+      "createdBy": "Recognition Team",
+      "createdAt": "2025-01-16T11:00:00Z"
+    },
+    {
+      "id": "certificate_004",
+      "name": "Certificado Moderno",
+      "description": "Design contemporâneo com elementos geométricos",
+      "category": "certificate",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/certificate_004.jpg"
+      ],
+      "usageCount": 980,
+      "createdBy": "Modern Team",
+      "createdAt": "2025-01-19T15:30:00Z"
+    },
+    {
+      "id": "letter_001",
+      "name": "Carta Formal Empresarial",
+      "description": "Template para correspondência corporativa",
+      "category": "letter",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/letter_001.jpg"
+      ],
+      "usageCount": 567,
+      "createdBy": "Business Team",
+      "createdAt": "2025-01-14T11:20:00Z"
+    },
+    {
+      "id": "letter_002",
+      "name": "Carta de Apresentação",
+      "description": "Template profissional para apresentação pessoal",
+      "category": "letter",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/letter_002.jpg"
+      ],
+      "usageCount": 1230,
+      "createdBy": "Career Team",
+      "createdAt": "2025-01-17T09:15:00Z"
+    },
+    {
+      "id": "letter_003",
+      "name": "Carta de Recomendação",
+      "description": "Modelo formal para cartas de recomendação",
+      "category": "letter",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/letter_003.jpg"
+      ],
+      "usageCount": 890,
+      "createdBy": "Professional Team",
+      "createdAt": "2025-01-21T10:45:00Z"
+    },
+    {
+      "id": "report_001",
+      "name": "Relatório Executivo",
+      "description": "Template profissional para relatórios corporativos",
+      "category": "report",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/report_001_page1.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/report_001_page2.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/report_001_page3.jpg"
+      ],
+      "usageCount": 430,
+      "createdBy": "Corporate Solutions",
+      "createdAt": "2025-01-11T13:00:00Z"
+    },
+    {
+      "id": "report_002",
+      "name": "Relatório Técnico",
+      "description": "Template para relatórios técnicos detalhados",
+      "category": "report",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/report_002_page1.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/report_002_page2.jpg"
+      ],
+      "usageCount": 670,
+      "createdBy": "Technical Team",
+      "createdAt": "2025-01-23T12:00:00Z"
+    },
+    {
+      "id": "report_003",
+      "name": "Relatório Financeiro",
+      "description": "Template profissional para análises financeiras",
+      "category": "report",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/report_003_page1.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/report_003_page2.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/report_003_page3.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/report_003_page4.jpg"
+      ],
+      "usageCount": 540,
+      "createdBy": "Finance Team",
+      "createdAt": "2025-01-25T14:30:00Z"
+    },
+    {
+      "id": "contract_001",
+      "name": "Contrato de Prestação de Serviços",
+      "description": "Modelo legal para contratos profissionais",
+      "category": "contract",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/contract_001_page1.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/contract_001_page2.jpg"
+      ],
+      "usageCount": 780,
+      "createdBy": "Legal Team",
+      "createdAt": "2025-01-09T15:30:00Z"
+    },
+    {
+      "id": "contract_002",
+      "name": "Contrato de Locação",
+      "description": "Template completo para contratos de aluguel",
+      "category": "contract",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/contract_002_page1.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/contract_002_page2.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/contract_002_page3.jpg"
+      ],
+      "usageCount": 1240,
+      "createdBy": "Real Estate Team",
+      "createdAt": "2025-01-24T16:00:00Z"
+    },
+    {
+      "id": "contract_003",
+      "name": "Contrato de Trabalho",
+      "description": "Modelo padrão para contratos trabalhistas",
+      "category": "contract",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/contract_003_page1.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/contract_003_page2.jpg"
+      ],
+      "usageCount": 920,
+      "createdBy": "HR Team",
+      "createdAt": "2025-01-26T09:00:00Z"
+    },
+    {
+      "id": "invoice_001",
+      "name": "Fatura Comercial Simples",
+      "description": "Template clean para faturas e recibos",
+      "category": "invoice",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/invoice_001.jpg"
+      ],
+      "usageCount": 1520,
+      "createdBy": "Finance Team",
+      "createdAt": "2025-01-13T10:15:00Z"
+    },
+    {
+      "id": "invoice_002",
+      "name": "Fatura Profissional Premium",
+      "description": "Design elegante para empresas",
+      "category": "invoice",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/invoice_002.jpg"
+      ],
+      "usageCount": 2100,
+      "createdBy": "Premium Finance",
+      "createdAt": "2025-01-27T11:30:00Z"
+    },
+    {
+      "id": "invoice_003",
+      "name": "Recibo Detalhado",
+      "description": "Template com campos personalizáveis",
+      "category": "invoice",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/invoice_003.jpg"
+      ],
+      "usageCount": 880,
+      "createdBy": "Accounting Team",
+      "createdAt": "2025-01-28T13:00:00Z"
+    },
+    {
+      "id": "presentation_001",
+      "name": "Apresentação Corporativa Moderna",
+      "description": "Slides profissionais para apresentações de negócios",
+      "category": "presentation",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/presentation_001_slide1.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/presentation_001_slide2.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/presentation_001_slide3.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/presentation_001_slide4.jpg"
+      ],
+      "usageCount": 920,
+      "createdBy": "Presentation Studio",
+      "createdAt": "2025-01-07T12:00:00Z"
+    },
+    {
+      "id": "presentation_002",
+      "name": "Pitch Deck Startup",
+      "description": "Template moderno para apresentação de startups",
+      "category": "presentation",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/presentation_002_slide1.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/presentation_002_slide2.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/presentation_002_slide3.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/presentation_002_slide4.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/presentation_002_slide5.jpg"
+      ],
+      "usageCount": 1450,
+      "createdBy": "Startup Team",
+      "createdAt": "2025-01-29T15:00:00Z"
+    },
+    {
+      "id": "presentation_003",
+      "name": "Apresentação Educacional",
+      "description": "Slides coloridos para aulas e workshops",
+      "category": "presentation",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/presentation_003_slide1.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/presentation_003_slide2.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/presentation_003_slide3.jpg"
+      ],
+      "usageCount": 760,
+      "createdBy": "Education Team",
+      "createdAt": "2025-01-30T10:00:00Z"
+    },
+    {
+      "id": "essay_001",
+      "name": "TCC - Trabalho Acadêmico ABNT",
+      "description": "Template formatado conforme normas ABNT",
+      "category": "essay",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/essay_001_page1.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/essay_001_page2.jpg"
+      ],
+      "usageCount": 650,
+      "createdBy": "Academic Team",
+      "createdAt": "2025-01-06T14:00:00Z"
+    },
+    {
+      "id": "essay_002",
+      "name": "Artigo Científico",
+      "description": "Template para publicações acadêmicas",
+      "category": "essay",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/essay_002_page1.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/essay_002_page2.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/essay_002_page3.jpg"
+      ],
+      "usageCount": 1120,
+      "createdBy": "Research Team",
+      "createdAt": "2025-01-31T12:30:00Z"
+    },
+    {
+      "id": "essay_003",
+      "name": "Trabalho de Pesquisa",
+      "description": "Template versátil para trabalhos acadêmicos",
+      "category": "essay",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/essay_003_page1.jpg",
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/essay_003_page2.jpg"
+      ],
+      "usageCount": 840,
+      "createdBy": "University Team",
+      "createdAt": "2025-02-01T09:00:00Z"
+    },
+    {
+      "id": "other_001",
+      "name": "Documento em Branco",
+      "description": "Template básico para qualquer tipo de documento",
+      "category": "other",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/other_001.jpg"
+      ],
+      "usageCount": 340,
+      "createdBy": "Base Templates",
+      "createdAt": "2025-01-05T09:30:00Z"
+    },
+    {
+      "id": "other_002",
+      "name": "Folheto Informativo",
+      "description": "Template para panfletos e flyers",
+      "category": "other",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/other_002.jpg"
+      ],
+      "usageCount": 560,
+      "createdBy": "Marketing Team",
+      "createdAt": "2025-02-02T14:00:00Z"
+    },
+    {
+      "id": "other_003",
+      "name": "Formulário Personalizado",
+      "description": "Template para criar formulários diversos",
+      "category": "other",
+      "images": [
+        "https://raw.githubusercontent.com/Alfredoooh/data-server/main/public/templates/other_003.jpg"
+      ],
+      "usageCount": 720,
+      "createdBy": "Forms Team",
+      "createdAt": "2025-02-03T11:00:00Z"
+    }
+  ]
+}

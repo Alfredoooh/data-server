@@ -1,0 +1,23 @@
+{
+  "articles": [
+    {
+      "id": "5",
+      "title": "Sistema Solar se Move Três Vezes Mais Rápido do que Previsto",
+      "description": "Pesquisa revela que o Sistema Solar viaja pelo espaço a uma velocidade muito maior do que os modelos cosmológicos padrões indicavam.",
+      "content": "Astrônomos da Universidade de Bielefeld, Alemanha, usando uma rede europeia de radiotelescópios, descobriram que o Sistema Solar está se movendo através do cosmos a uma velocidade mais de três vezes superior ao previsto pelos modelos atuais. Essa descoberta desafia suposições fundamentais do modelo cosmológico padrão, sugerindo que o universo pode ser menos homogêneo do que se pensava ou que existem aspectos desconhecidos na dinâmica do Sistema Solar. O estudo foi publicado na revista Physical Review Letters e levanta importantes questionamentos sobre a estrutura e evolução do universo.",
+      "source": "Physical Review Letters",
+      "author": "Lukas Böhme e equipe",
+      "imageUrl": "URL_da_imagem_se_disponivel",
+      "category": "Ciência",
+      "tags": ["Cosmologia", "Sistema Solar", "Astronomia", "Velocidade do Sistema Solar"],
+      "publishedAt": "2025-11-15T00:00:00Z",
+      "url": "URL_da_fonte_se_disponivel"
+    }
+  ],
+  "metadata": {
+    "version": "1.1",
+    "fileNumber": 5,
+    "totalArticles": 5,
+    "lastUpdated": "2025-11-15T15:40:00Z"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "articles": [
+    {
+      "id": "news_1_002",
+      "title": "Cientistas sugerem que alienígenas podem achar o voo espacial desinteressante",
+      "description": "Um astrofísico da NASA propõe que civilizações alienígenas avançadas possam ter perdido o interesse em explorar o espaço, o que explicaria a ausência de contato conosco.",
+      "content": "Dr. Robin Corbet, do Centro de Voo Espacial Goddard da NASA e da Universidade de Maryland, sugere que alienígenas podem atingir um nível moderado de tecnologia e considerar as viagens espaciais muito custosas ou sem retorno significativo, entrando em uma espécie de 'habituação cósmica' que os desestimula a explorar ou fazer contato. Essa teoria, chamada "mundanidade radical", oferece uma explicação alternativa para o paradoxo de Fermi, que questiona por que ainda não detectamos sinais de inteligência extraterrestre. Em vez de civilizações superavançadas, podemos estar cercados por culturas que, apesar de tecnológicas, decidem não se aventurar em grandes viagens ou transmissões espaciais ativas.",
+      "source": "Indian Express",
+      "author": "Redação Indian Express",
+      "imageUrl": "https://images.indianexpress.com/2025/11/aliens-spaceflight-1200.jpg",
+      "category": "Ciência",
+      "tags": ["Alienígenas", "NASA", "Paradoxo de Fermi", "Exploração Espacial", "Astrofísica"],
+      "publishedAt": "2025-11-09T10:30:00Z",
+      "url": "https://indianexpress.com/article/science/aliens-find-spaceflight-uninteresting-8345674/"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "fileNumber": 1,
+    "totalArticles": 1,
+    "lastUpdated": "2025-11-09T00:00:00Z"
+  }
+}

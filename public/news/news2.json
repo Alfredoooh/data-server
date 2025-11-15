@@ -1,23 +1,23 @@
 {
   "articles": [
     {
-      "id": "news_1_002",
-      "title": "Cientistas sugerem que alienígenas podem achar o voo espacial desinteressante",
-      "description": "Um astrofísico da NASA propõe que civilizações alienígenas avançadas possam ter perdido o interesse em explorar o espaço, o que explicaria a ausência de contato conosco.",
-      "content": "Dr. Robin Corbet, do Centro de Voo Espacial Goddard da NASA e da Universidade de Maryland, sugere que alienígenas podem atingir um nível moderado de tecnologia e considerar as viagens espaciais muito custosas ou sem retorno significativo, entrando em uma espécie de 'habituação cósmica' que os desestimula a explorar ou fazer contato. Essa teoria, chamada "mundanidade radical", oferece uma explicação alternativa para o paradoxo de Fermi, que questiona por que ainda não detectamos sinais de inteligência extraterrestre. Em vez de civilizações superavançadas, podemos estar cercados por culturas que, apesar de tecnológicas, decidem não se aventurar em grandes viagens ou transmissões espaciais ativas.",
-      "source": "Indian Express",
-      "author": "Redação Indian Express",
-      "imageUrl": "https://images.indianexpress.com/2025/11/aliens-spaceflight-1200.jpg",
-      "category": "Ciência",
-      "tags": ["Alienígenas", "NASA", "Paradoxo de Fermi", "Exploração Espacial", "Astrofísica"],
-      "publishedAt": "2025-11-09T10:30:00Z",
-      "url": "https://indianexpress.com/article/science/aliens-find-spaceflight-uninteresting-8345674/"
+      "id": "news_1_024",
+      "title": "Alembic capta US$ 145 milhões em Série B com avaliação de US$ 645 milhões",
+      "description": "Startup de marketing de IA Alembic levanta US$ 145 milhões em rodada Série B, chegando a uma avaliação de US$ 645 milhões, para expandir soluções de causal AI que conectam gastos em marketing a resultados de vendas.",
+      "content": "A Alembic Technologies, startup sediada em San Francisco focada em análises de marketing baseadas em inteligência artificial causal, concluiu uma rodada de investimento Série B de US$ 145 milhões, avaliando a empresa em US$ 645 milhões. Esta captação foi liderada pelo fundo de private equity Prysm Capital e pela Accenture, com participação da WndrCo, firma de venture capital cofundada pelo executivo de Hollywood Jeffrey Katzenberg. A Alembic usa IA causal para conectar diretamente investimentos em publicidade—em TV, podcasts, redes sociais e RP—com os resultados reais em receita, superando métodos tradicionais que identificam apenas correlações. Clientes como Delta Air Lines, Mars e Nvidia já utilizam a plataforma para mensurar impactos financeiros precisos de campanhas publicitárias. Com o novo capital, a Alembic investirá na expansão de mercado e no desenvolvimento de infraestrutura tecnológica, incluindo a aquisição de um supercomputador Nvidia NVL72 com 72 GPUs Blackwell para acelerar seus modelos de IA. Essa aquisição reforça a estratégia da empresa para oferecer soluções de análise e otimização em tempo real, sem dependência das grandes nuvens públicas e com redundância geográfica entre os data centers.",
+      "source": "fundz.net",
+      "author": "Redação Fundz",
+      "imageUrl": "https://tii.imgix.net/production/articles/16015/4ace4715-c599-4db1-8ba6-2e9b283891df.png?auto=compress&fit=crop&auto=format&w=400&dpr=2",
+      "category": "Tecnologia",
+      "tags": ["IA", "Marketing", "Investimentos", "Startup", "Alembic", "Causal AI"],
+      "publishedAt": "2025-11-14T12:00:00Z",
+      "url": "https://fundz.net/alembic-raise-145m-series-b-valuation-645m"
     }
   ],
   "metadata": {
     "version": "1.0.0",
     "fileNumber": 1,
     "totalArticles": 1,
-    "lastUpdated": "2025-11-09T00:00:00Z"
+    "lastUpdated": "2025-11-14T12:00:00Z"
   }
 }

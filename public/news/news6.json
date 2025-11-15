@@ -1,0 +1,23 @@
+{
+  "articles": [
+    {
+      "id": "6",
+      "title": "BlackRock's BUIDL Fund Accepted as Binance Collateral, Expands to BNB Chain",
+      "description": "BlackRock's tokenized $2.5 billion money market fund BUIDL is accepted as off-exchange collateral on Binance and launches on BNB Chain, boosting institutional trading.",
+      "content": "BlackRock's $2.5 billion Institutional Digital Liquidity Fund (BUIDL), tokenized and backed by U.S. Treasury bills, is now integrated as eligible off-exchange collateral on Binance for institutional traders. This allows institutions to hold BUIDL tokens with third-party custodians while accessing Binance liquidity for trading. Additionally, BUIDL has launched a new share class on BNB Chain, expanding its blockchain presence beyond Ethereum and others. The fund has about 93 holders, averaging a 3.7% annualized yield recently. This move bridges traditional finance and crypto markets by enabling regulated, yield-bearing real-world assets as collateral in digital markets.",
+      "source": "Binance / BlackRock / Coindesk",
+      "author": "Various",
+      "imageUrl": "https://example.com/buidl-fund-image.jpg",
+      "category": "Finance",
+      "tags": ["BlackRock", "BUIDL", "Binance", "Tokenized Assets", "Institutional Trading", "BNB Chain"],
+      "publishedAt": "2025-11-13T00:00:00Z",
+      "url": "https://www.coindesk.com/markets/2025/11/13/blackrocks-buidl-fund-accepted-as-binance-collateral-expands-to-bnb-chain/"
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "fileNumber": 4,
+    "totalArticles": 1,
+    "lastUpdated": "2025-11-15T15:57:00Z"
+  }
+}

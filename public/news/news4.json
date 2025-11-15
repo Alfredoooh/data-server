@@ -1,1 +1,24 @@
-https://i.insider.com/69172608e1a9cbb014de3541?width=1000&format=jpeg&auto=webp&quality=40,34
+{
+  "articles": [
+    {
+      "id": "4",
+      "title": "OpenAI Resolves ChatGPT's Longstanding Em Dash Problem",
+      "description": "OpenAI has fixed the issue where ChatGPT stubbornly overused em dashes despite user instructions to avoid them.",
+      "content": "After months of user complaints about ChatGPT's excessive em dash usage and refusal to stop even when asked, OpenAI CEO Sam Altman announced a fix. Users can now customize ChatGPT via personalization settings to instruct the model not to use em dashes. The problem stemmed from training data biases and technical style guideline compliance. The feature is currently in pilot mode in select regions and will roll out further pending feedback.",
+      "source": "TechCrunch",
+      "author": "Sam Altman / OpenAI",
+      "imageUrl": "https://i.insider.com/69172608e1a9cbb014de3541?width=1000&format=jpeg&auto=webp&quality=40,34
+",
+      "category": "Technology",
+      "tags": ["OpenAI", "ChatGPT", "Em Dash", "AI Personalization", "Sam Altman"],
+      "publishedAt": "2025-11-13T00:00:00Z",
+      "url": "https://techcrunch.com/2025/11/13/openai-fixes-chatgpt-em-dash-problem"
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "fileNumber": 4,
+    "totalArticles": 4,
+    "lastUpdated": "2025-11-15T13:37:00Z"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "apiKey": "sk-7c0076d4248e44bdaeaed3bebf73aaa7",
+  "defaultModel": "deepseek-chat",
+  "defaultTemperature": 0.7,
+  "defaultMaxTokens": 2000,
+  "appVersion": "1.0.0",
+  "lastUpdated": "2025-11-19"
+}

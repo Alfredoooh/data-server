@@ -13,14 +13,14 @@ const Cache = require('./utils/cache');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// CORS DEVE VIR PRIMEIRO
+// CORS PRIMEIRO
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
 }));
 
-// Helmet com configurações ajustadas para não bloquear
+// Helmet configurado
 app.use(helmet({
   contentSecurityPolicy: false,
   crossOriginResourcePolicy: false,
@@ -30,7 +30,7 @@ app.use(helmet({
 app.use(compression());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
-app.use(morgan('combined', { stream: { write: msg => logger.info(msg.trim()) } }));
+app.use(morgan('combined', { stream: { write: msg => console.log(msg.trim()) } }));
 
 // Rate Limiting
 const rateLimiter = new RateLimiterMemory({
@@ -114,7 +114,6 @@ app.post('/api/generate', rateLimiterMiddleware, checkModel, async (req, res) =>
       return res.status(400).json({ error: 'Prompt inválido' });
     }
 
-    // Verificar cache
     const cacheKey = `gen:${prompt}:${maxLength}:${temperature}`;
     const cached = cache.get(cacheKey);
     if (cached) {
@@ -123,20 +122,14 @@ app.post('/api/generate', rateLimiterMiddleware, checkModel, async (req, res) =>
 
     console.log(`Gerando texto para prompt: "${prompt.substring(0, 50)}..."`);
 
-    // Processar prompt
     const processedPrompt = textProcessor.preprocess(prompt);
-
-    // Gerar texto
     const generatedText = await aiModel.generateText(processedPrompt, {
       maxLength,
       temperature,
       topK
     });
 
-    // Pós-processar
     const finalText = textProcessor.postprocess(generatedText);
-
-    // Salvar no cache
     cache.set(cacheKey, finalText);
 
     res.json({
@@ -209,7 +202,7 @@ app.post('/api/summarize', rateLimiterMiddleware, checkModel, async (req, res) =
   }
 });
 
-// Treinamento (endpoint protegido)
+// Treinamento
 app.post('/api/train', rateLimiterMiddleware, async (req, res) => {
   try {
     const { texts, epochs = 10, batchSize = 32 } = req.body;

@@ -13,31 +13,24 @@ const Cache = require('./utils/cache');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// CORS deve vir ANTES do helmet
+// CORS DEVE VIR PRIMEIRO
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-  credentials: true
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
 }));
 
-// Helmet com configuração ajustada para não bloquear CORS
+// Helmet com configurações ajustadas para não bloquear
 app.use(helmet({
   contentSecurityPolicy: false,
-  crossOriginEmbedderPolicy: false,
-  crossOriginResourcePolicy: { policy: "cross-origin" }
+  crossOriginResourcePolicy: false,
+  crossOriginEmbedderPolicy: false
 }));
 
 app.use(compression());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 app.use(morgan('combined', { stream: { write: msg => logger.info(msg.trim()) } }));
-
-// Middleware para garantir que sempre retorna JSON
-app.use((req, res, next) => {
-  res.setHeader('Content-Type', 'application/json');
-  next();
-});
 
 // Rate Limiting
 const rateLimiter = new RateLimiterMemory({
@@ -50,7 +43,7 @@ const rateLimiterMiddleware = async (req, res, next) => {
     await rateLimiter.consume(req.ip);
     next();
   } catch {
-    return res.status(429).json({ error: 'Muitas requisições. Tente novamente em breve.' });
+    res.status(429).json({ error: 'Muitas requisições. Tente novamente em breve.' });
   }
 };
 
@@ -88,7 +81,7 @@ const checkModel = (req, res, next) => {
 
 // Health check
 app.get('/health', (req, res) => {
-  return res.json({
+  res.json({
     status: 'online',
     modelLoaded,
     timestamp: new Date().toISOString(),
@@ -98,7 +91,7 @@ app.get('/health', (req, res) => {
 
 // Informações do modelo
 app.get('/api/info', checkModel, (req, res) => {
-  return res.json({
+  res.json({
     name: 'AI Text Generation System',
     version: '1.0.0',
     model: aiModel.getInfo(),
@@ -146,7 +139,7 @@ app.post('/api/generate', rateLimiterMiddleware, checkModel, async (req, res) =>
     // Salvar no cache
     cache.set(cacheKey, finalText);
 
-    return res.json({
+    res.json({
       text: finalText,
       metadata: {
         promptLength: prompt.length,
@@ -158,7 +151,7 @@ app.post('/api/generate', rateLimiterMiddleware, checkModel, async (req, res) =>
 
   } catch (error) {
     logger.error('Erro na geração:', error);
-    return res.status(500).json({ error: 'Erro ao gerar texto', details: error.message });
+    res.status(500).json({ error: 'Erro ao gerar texto', details: error.message });
   }
 });
 
@@ -175,7 +168,7 @@ app.post('/api/analyze', rateLimiterMiddleware, checkModel, async (req, res) => 
     const entities = textProcessor.extractEntities(text);
     const keywords = textProcessor.extractKeywords(text);
 
-    return res.json({
+    res.json({
       sentiment,
       entities,
       keywords,
@@ -188,7 +181,7 @@ app.post('/api/analyze', rateLimiterMiddleware, checkModel, async (req, res) => 
 
   } catch (error) {
     logger.error('Erro na análise:', error);
-    return res.status(500).json({ error: 'Erro ao analisar texto', details: error.message });
+    res.status(500).json({ error: 'Erro ao analisar texto', details: error.message });
   }
 });
 
@@ -203,7 +196,7 @@ app.post('/api/summarize', rateLimiterMiddleware, checkModel, async (req, res) =
 
     const summary = textProcessor.summarize(text, sentences);
 
-    return res.json({
+    res.json({
       summary,
       original_length: text.length,
       summary_length: summary.length,
@@ -212,7 +205,7 @@ app.post('/api/summarize', rateLimiterMiddleware, checkModel, async (req, res) =
 
   } catch (error) {
     logger.error('Erro no resumo:', error);
-    return res.status(500).json({ error: 'Erro ao resumir texto', details: error.message });
+    res.status(500).json({ error: 'Erro ao resumir texto', details: error.message });
   }
 });
 
@@ -229,7 +222,7 @@ app.post('/api/train', rateLimiterMiddleware, async (req, res) => {
 
     const result = await aiModel.train(texts, { epochs, batchSize });
 
-    return res.json({
+    res.json({
       message: 'Treinamento concluído',
       result,
       trained_samples: texts.length
@@ -237,7 +230,7 @@ app.post('/api/train', rateLimiterMiddleware, async (req, res) => {
 
   } catch (error) {
     logger.error('Erro no treinamento:', error);
-    return res.status(500).json({ error: 'Erro ao treinar modelo', details: error.message });
+    res.status(500).json({ error: 'Erro ao treinar modelo', details: error.message });
   }
 });
 
@@ -252,40 +245,40 @@ app.post('/api/complete', rateLimiterMiddleware, checkModel, async (req, res) =>
 
     const suggestions = await aiModel.complete(text, numSuggestions);
 
-    return res.json({
+    res.json({
       suggestions,
       original: text
     });
 
   } catch (error) {
     logger.error('Erro na completação:', error);
-    return res.status(500).json({ error: 'Erro ao completar texto', details: error.message });
+    res.status(500).json({ error: 'Erro ao completar texto', details: error.message });
   }
 });
 
 // Limpar cache
 app.post('/api/cache/clear', (req, res) => {
   cache.clear();
-  return res.json({ message: 'Cache limpo com sucesso' });
+  res.json({ message: 'Cache limpo com sucesso' });
 });
 
 // Estatísticas do cache
 app.get('/api/cache/stats', (req, res) => {
-  return res.json(cache.stats());
+  res.json(cache.stats());
 });
 
 // Error handler
 app.use((err, req, res, next) => {
   logger.error('Erro não tratado:', err);
-  return res.status(500).json({ 
+  res.status(500).json({ 
     error: 'Erro interno do servidor',
-    message: process.env.NODE_ENV === 'development' ? err.message : 'Erro desconhecido'
+    message: process.env.NODE_ENV === 'development' ? err.message : undefined
   });
 });
 
 // 404 handler
 app.use((req, res) => {
-  return res.status(404).json({ error: 'Rota não encontrada' });
+  res.status(404).json({ error: 'Rota não encontrada' });
 });
 
 // Iniciar servidor

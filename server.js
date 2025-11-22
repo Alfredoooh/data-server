@@ -13,17 +13,31 @@ const Cache = require('./utils/cache');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middlewares de segurança e otimização
-app.use(helmet());
-app.use(compression());
+// CORS deve vir ANTES do helmet
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+  credentials: true
 }));
+
+// Helmet com configuração ajustada para não bloquear CORS
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false,
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
+
+app.use(compression());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 app.use(morgan('combined', { stream: { write: msg => logger.info(msg.trim()) } }));
+
+// Middleware para garantir que sempre retorna JSON
+app.use((req, res, next) => {
+  res.setHeader('Content-Type', 'application/json');
+  next();
+});
 
 // Rate Limiting
 const rateLimiter = new RateLimiterMemory({
@@ -36,7 +50,7 @@ const rateLimiterMiddleware = async (req, res, next) => {
     await rateLimiter.consume(req.ip);
     next();
   } catch {
-    res.status(429).json({ error: 'Muitas requisições. Tente novamente em breve.' });
+    return res.status(429).json({ error: 'Muitas requisições. Tente novamente em breve.' });
   }
 };
 
@@ -74,7 +88,7 @@ const checkModel = (req, res, next) => {
 
 // Health check
 app.get('/health', (req, res) => {
-  res.json({
+  return res.json({
     status: 'online',
     modelLoaded,
     timestamp: new Date().toISOString(),
@@ -84,7 +98,7 @@ app.get('/health', (req, res) => {
 
 // Informações do modelo
 app.get('/api/info', checkModel, (req, res) => {
-  res.json({
+  return res.json({
     name: 'AI Text Generation System',
     version: '1.0.0',
     model: aiModel.getInfo(),
@@ -132,7 +146,7 @@ app.post('/api/generate', rateLimiterMiddleware, checkModel, async (req, res) =>
     // Salvar no cache
     cache.set(cacheKey, finalText);
 
-    res.json({
+    return res.json({
       text: finalText,
       metadata: {
         promptLength: prompt.length,
@@ -144,7 +158,7 @@ app.post('/api/generate', rateLimiterMiddleware, checkModel, async (req, res) =>
 
   } catch (error) {
     logger.error('Erro na geração:', error);
-    res.status(500).json({ error: 'Erro ao gerar texto', details: error.message });
+    return res.status(500).json({ error: 'Erro ao gerar texto', details: error.message });
   }
 });
 
@@ -157,11 +171,11 @@ app.post('/api/analyze', rateLimiterMiddleware, checkModel, async (req, res) => 
       return res.status(400).json({ error: 'Texto inválido' });
     }
 
-    const sentiment = await textProcessor.analyzeSentiment(text);
+    const sentiment = textProcessor.analyzeSentiment(text);
     const entities = textProcessor.extractEntities(text);
     const keywords = textProcessor.extractKeywords(text);
 
-    res.json({
+    return res.json({
       sentiment,
       entities,
       keywords,
@@ -174,7 +188,7 @@ app.post('/api/analyze', rateLimiterMiddleware, checkModel, async (req, res) => 
 
   } catch (error) {
     logger.error('Erro na análise:', error);
-    res.status(500).json({ error: 'Erro ao analisar texto' });
+    return res.status(500).json({ error: 'Erro ao analisar texto', details: error.message });
   }
 });
 
@@ -189,7 +203,7 @@ app.post('/api/summarize', rateLimiterMiddleware, checkModel, async (req, res) =
 
     const summary = textProcessor.summarize(text, sentences);
 
-    res.json({
+    return res.json({
       summary,
       original_length: text.length,
       summary_length: summary.length,
@@ -198,7 +212,7 @@ app.post('/api/summarize', rateLimiterMiddleware, checkModel, async (req, res) =
 
   } catch (error) {
     logger.error('Erro no resumo:', error);
-    res.status(500).json({ error: 'Erro ao resumir texto' });
+    return res.status(500).json({ error: 'Erro ao resumir texto', details: error.message });
   }
 });
 
@@ -215,7 +229,7 @@ app.post('/api/train', rateLimiterMiddleware, async (req, res) => {
 
     const result = await aiModel.train(texts, { epochs, batchSize });
 
-    res.json({
+    return res.json({
       message: 'Treinamento concluído',
       result,
       trained_samples: texts.length
@@ -223,7 +237,7 @@ app.post('/api/train', rateLimiterMiddleware, async (req, res) => {
 
   } catch (error) {
     logger.error('Erro no treinamento:', error);
-    res.status(500).json({ error: 'Erro ao treinar modelo' });
+    return res.status(500).json({ error: 'Erro ao treinar modelo', details: error.message });
   }
 });
 
@@ -238,40 +252,40 @@ app.post('/api/complete', rateLimiterMiddleware, checkModel, async (req, res) =>
 
     const suggestions = await aiModel.complete(text, numSuggestions);
 
-    res.json({
+    return res.json({
       suggestions,
       original: text
     });
 
   } catch (error) {
     logger.error('Erro na completação:', error);
-    res.status(500).json({ error: 'Erro ao completar texto' });
+    return res.status(500).json({ error: 'Erro ao completar texto', details: error.message });
   }
 });
 
 // Limpar cache
 app.post('/api/cache/clear', (req, res) => {
   cache.clear();
-  res.json({ message: 'Cache limpo com sucesso' });
+  return res.json({ message: 'Cache limpo com sucesso' });
 });
 
 // Estatísticas do cache
 app.get('/api/cache/stats', (req, res) => {
-  res.json(cache.stats());
+  return res.json(cache.stats());
 });
 
 // Error handler
 app.use((err, req, res, next) => {
   logger.error('Erro não tratado:', err);
-  res.status(500).json({ 
+  return res.status(500).json({ 
     error: 'Erro interno do servidor',
-    message: process.env.NODE_ENV === 'development' ? err.message : undefined
+    message: process.env.NODE_ENV === 'development' ? err.message : 'Erro desconhecido'
   });
 });
 
 // 404 handler
 app.use((req, res) => {
-  res.status(404).json({ error: 'Rota não encontrada' });
+  return res.status(404).json({ error: 'Rota não encontrada' });
 });
 
 // Iniciar servidor
@@ -291,3 +305,5 @@ process.on('SIGINT', () => {
   logger.info('SIGINT recebido. Encerrando graciosamente...');
   process.exit(0);
 });
+
+module.exports = app;

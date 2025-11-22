@@ -1,15 +1,18 @@
 {
   "name": "meu-ia-chat",
   "version": "0.1.0",
+  "description": "API Chat local com brain.js + consumer HTML",
   "main": "server.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node server.js",
     "train": "node train.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "brain.js": "^2.0.0",
     "body-parser": "^1.20.2",
-    "dotenv": "^16.0.3"
+    "brain.js": "^2.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
   }
 }

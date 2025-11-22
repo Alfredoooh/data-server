@@ -1,70 +1,77 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const fs = require('fs');
+// server.js (ESM)
+import express from 'express';
+import dotenv from 'dotenv';
+import { getLlama } from 'node-llama-cpp';
+import { Pool } from 'pg';
+
+dotenv.config();
+const PORT = process.env.PORT || 3000;
+const MODEL_PATH = process.env.MODEL_PATH || './models/my-model.gguf';
+const DATABASE_URL = process.env.DATABASE_URL; // Render provides DATABASE_URL
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
-// CORS TOTALMENTE LIBERADO
-app.use(cors());
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "*");
-  next();
-});
-
-// Middleware
 app.use(express.json());
 
-// Servir arquivos estáticos
-app.use(express.static('public'));
+const pgPool = new Pool({ connectionString: DATABASE_URL });
 
-// Rota raiz
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// bootstrap Llama
+let llama, model;
+async function initModel() {
+  llama = await getLlama();
+  model = await llama.loadModel({ modelPath: MODEL_PATH });
+  console.log('Modelo carregado:', MODEL_PATH);
+}
+initModel().catch(err => {
+  console.error('Erro ao iniciar modelo', err);
+  process.exit(1);
 });
 
-// Health check
-app.get('/health', (req, res) => {
-  res.json({
-    status: 'OK',
-    timestamp: new Date().toISOString(),
-    version: '1.0.0'
-  });
-});
+// Endpoint: gerar texto
+app.post('/generate', async (req, res) => {
+  const { prompt, max_tokens = 256 } = req.body;
+  if (!prompt) return res.status(400).json({ error: 'prompt required' });
 
-// Listagem dinâmica dos arquivos JSON
-app.get('/api/list/:type', (req, res) => {
-  const type = req.params.type;
-  const dirPath = path.join(__dirname, 'public', type);
+  try {
+    const context = await model.createContext();
+    // usa LlamaChatSession (mais ergonomico) ou context.prompt direto
+    const { LlamaChatSession } = await import('node-llama-cpp');
+    const session = new LlamaChatSession({ contextSequence: context.getSequence() });
 
-  if (!fs.existsSync(dirPath)) {
-    return res.status(404).json({ error: 'Directory not found' });
+    const out = await session.prompt(prompt, { maxTokens: max_tokens });
+    return res.json({ text: out });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: String(err) });
   }
-
-  const files = fs.readdirSync(dirPath)
-    .filter(file => file.endsWith('.json'))
-    .sort((a, b) => {
-      const numA = parseInt(a.match(/\d+/)?.[0] || '0');
-      const numB = parseInt(b.match(/\d+/)?.[0] || '0');
-      return numA - numB;
-    });
-
-  res.json({
-    type,
-    totalFiles: files.length,
-    files
-  });
 });
 
-// Start
+// Endpoint: ingest (gera embedding e salva no Postgres)
+app.post('/ingest', async (req, res) => {
+  const { text } = req.body;
+  if (!text) return res.status(400).json({ error: 'text required' });
+
+  try {
+    const ectx = await model.createEmbeddingContext();
+    const emb = await ectx.getEmbeddingFor(text);
+    // emb.vector é um array de floats
+    const client = await pgPool.connect();
+    try {
+      // Assumindo que pgvector está instalado e coluna é 'vector(1536)'
+      await client.query(
+        'INSERT INTO documents (content, embedding) VALUES ($1, $2)',
+        [text, emb.vector]
+      );
+    } finally {
+      client.release();
+    }
+
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: String(err) });
+  }
+});
+
 app.listen(PORT, () => {
-  console.log(`🚀 Data Server rodando em http://localhost:${PORT}`);
-  console.log(`🌐 CORS liberado: Access-Control-Allow-Origin: *`);
-  console.log(`📰 News: /news/news1.json`);
-  console.log(`📚 Books: /books/book1.json`);
-  console.log(`📢 Ads: /advertisements/ad1.json`);
-  console.log(`👤 Avatars: /avatars/avatar1.json`);
+  console.log(`API rodando em http://localhost:${PORT}`);
 });

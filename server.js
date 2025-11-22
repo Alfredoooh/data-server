@@ -57,12 +57,12 @@ let modelLoaded = false;
 // Carregar modelo ao iniciar
 (async () => {
   try {
-    logger.info('Carregando modelo de IA...');
+    console.log('🔄 Carregando modelo de IA...');
     await aiModel.loadModel();
     modelLoaded = true;
-    logger.info('Modelo carregado com sucesso!');
+    console.log('✅ Modelo carregado com sucesso!');
   } catch (error) {
-    logger.error('Erro ao carregar modelo:', error);
+    console.error('❌ Erro ao carregar modelo:', error);
     modelLoaded = false;
   }
 })();
@@ -121,7 +121,7 @@ app.post('/api/generate', rateLimiterMiddleware, checkModel, async (req, res) =>
       return res.json({ text: cached, cached: true });
     }
 
-    logger.info(`Gerando texto para prompt: "${prompt.substring(0, 50)}..."`);
+    console.log(`Gerando texto para prompt: "${prompt.substring(0, 50)}..."`);
 
     // Processar prompt
     const processedPrompt = textProcessor.preprocess(prompt);
@@ -150,7 +150,7 @@ app.post('/api/generate', rateLimiterMiddleware, checkModel, async (req, res) =>
     });
 
   } catch (error) {
-    logger.error('Erro na geração:', error);
+    console.error('Erro na geração:', error);
     res.status(500).json({ error: 'Erro ao gerar texto', details: error.message });
   }
 });
@@ -180,7 +180,7 @@ app.post('/api/analyze', rateLimiterMiddleware, checkModel, async (req, res) => 
     });
 
   } catch (error) {
-    logger.error('Erro na análise:', error);
+    console.error('Erro na análise:', error);
     res.status(500).json({ error: 'Erro ao analisar texto', details: error.message });
   }
 });
@@ -204,7 +204,7 @@ app.post('/api/summarize', rateLimiterMiddleware, checkModel, async (req, res) =
     });
 
   } catch (error) {
-    logger.error('Erro no resumo:', error);
+    console.error('Erro no resumo:', error);
     res.status(500).json({ error: 'Erro ao resumir texto', details: error.message });
   }
 });
@@ -218,7 +218,7 @@ app.post('/api/train', rateLimiterMiddleware, async (req, res) => {
       return res.status(400).json({ error: 'Dados de treinamento inválidos' });
     }
 
-    logger.info(`Iniciando treinamento com ${texts.length} textos`);
+    console.log(`Iniciando treinamento com ${texts.length} textos`);
 
     const result = await aiModel.train(texts, { epochs, batchSize });
 
@@ -229,7 +229,7 @@ app.post('/api/train', rateLimiterMiddleware, async (req, res) => {
     });
 
   } catch (error) {
-    logger.error('Erro no treinamento:', error);
+    console.error('Erro no treinamento:', error);
     res.status(500).json({ error: 'Erro ao treinar modelo', details: error.message });
   }
 });
@@ -251,7 +251,7 @@ app.post('/api/complete', rateLimiterMiddleware, checkModel, async (req, res) =>
     });
 
   } catch (error) {
-    logger.error('Erro na completação:', error);
+    console.error('Erro na completação:', error);
     res.status(500).json({ error: 'Erro ao completar texto', details: error.message });
   }
 });
@@ -269,7 +269,7 @@ app.get('/api/cache/stats', (req, res) => {
 
 // Error handler
 app.use((err, req, res, next) => {
-  logger.error('Erro não tratado:', err);
+  console.error('Erro não tratado:', err);
   res.status(500).json({ 
     error: 'Erro interno do servidor',
     message: process.env.NODE_ENV === 'development' ? err.message : undefined
@@ -283,19 +283,19 @@ app.use((req, res) => {
 
 // Iniciar servidor
 app.listen(PORT, () => {
-  logger.info(`🚀 Servidor rodando na porta ${PORT}`);
-  logger.info(`📊 Ambiente: ${process.env.NODE_ENV || 'development'}`);
-  logger.info(`🤖 Modelo: ${modelLoaded ? 'Carregado' : 'Carregando...'}`);
+  console.log(`🚀 Servidor rodando na porta ${PORT}`);
+  console.log(`📊 Ambiente: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🤖 Modelo: ${modelLoaded ? 'Carregado' : 'Carregando...'}`);
 });
 
 // Graceful shutdown
 process.on('SIGTERM', () => {
-  logger.info('SIGTERM recebido. Encerrando graciosamente...');
+  console.log('SIGTERM recebido. Encerrando graciosamente...');
   process.exit(0);
 });
 
 process.on('SIGINT', () => {
-  logger.info('SIGINT recebido. Encerrando graciosamente...');
+  console.log('SIGINT recebido. Encerrando graciosamente...');
   process.exit(0);
 });
 
